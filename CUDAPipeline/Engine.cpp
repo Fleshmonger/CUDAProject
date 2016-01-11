@@ -3,7 +3,8 @@
 #include <GL/wglew.h>
 #include <GL/freeglut.h>
 
-// CUDA runtime
+// CUDA runtime,
+
 // CUDA utilities and system includes
 #include <cuda_runtime.h>
 #include <cuda_gl_interop.h>

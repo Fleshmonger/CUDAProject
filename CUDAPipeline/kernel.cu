@@ -14,12 +14,11 @@ __global__ void rasterizeBlock(uchar4 *frags, int *w, int *h) {
 			frags[x + y * (*w)] = make_uchar4(255, 0, 0, 255);
 }
 
-void rasterize(uchar4 *pixels, int width, int height, float3 *vertices, int *indices) {
-	//uchar4* frags = (uchar4 *)malloc(sizeof(uchar4) * w * h);;
-
-	float3 v1 = *(vertices + indices[0]),
-		v2 = *(vertices + indices[1]),
-		v3 = *(vertices + indices[2]);
+void rasterize(uchar4 *pixels, int width, int height, float3 *vertices, int3 *indices) {
+	int3 index = indices[0];
+	float3 v1 = *(vertices + index.x),
+		v2 = *(vertices + index.y),
+		v3 = *(vertices + index.z);
 
 	float x1 = fmin(v1.x, fmin(v2.x, v3.x)) * width,
 		x2 = fmax(v1.x, fmax(v2.x, v3.x)) * width,

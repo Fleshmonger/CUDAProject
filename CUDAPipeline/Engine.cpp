@@ -25,7 +25,7 @@
 #include <thrust/host_vector.h> 
 #include <thrust/device_vector.h>
 
-void rasterize(uchar4 *pixels, int width, int height, float3 *vertices, int *indices);
+void rasterize(uchar4 *pixels, int width, int height, float3 *vertices, int3 *indices);
 
 int imageW = 1000, imageH = 1000;
 uchar4 *pixels;
@@ -50,10 +50,8 @@ int main(int argc, char **argv) {
 	vertices[1] = make_float3(1.0, 0.5, 0.0),
 	vertices[2] = make_float3(1.0, 1.0, 0.0);
 
-	int *indices = new int[3];
-	indices[0] = 0;
-	indices[1] = 1;
-	indices[2] = 2;
+	int3 *indices = new int3[1];
+	indices[0] = make_int3(0, 1, 2);
 
 	// Rasterization
 	pixels = (uchar4 *)malloc(imageW * imageH * 4);

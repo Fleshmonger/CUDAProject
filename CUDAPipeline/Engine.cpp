@@ -25,6 +25,8 @@
 #include <thrust/host_vector.h> 
 #include <thrust/device_vector.h>
 
+uchar4* rasterize(int w, int h);
+
 int imageW = 1000, imageH = 1000;
 uchar4 *h_Src = (uchar4 *)malloc(imageW * imageH * 4);
 GLuint gl_Tex, gl_Shader;
@@ -32,8 +34,7 @@ GLuint gl_Tex, gl_Shader;
 void displayFunc(void);
 void initOpenGLBuffers(int w, int h);
 
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
 	printf("Initializing GLUT...\n");
 	glutInit(&argc, argv);
 
@@ -41,12 +42,8 @@ int main(int argc, char **argv)
 	glutInitWindowSize(imageW, imageH);
 	glutInitWindowPosition(0, 0);
 	glutCreateWindow(argv[0]);
+	h_Src = rasterize(imageW, imageH);
 	/*
-	for (int i = 0; i < imageW * 2; i++)
-	{
-		h_Src[i].x = 255;
-	}
-	*/
 	for (int y = 0; y < imageH; y++)
 	{
 		for (int x = 0; x < imageW; x++)
@@ -57,14 +54,14 @@ int main(int argc, char **argv)
 			h_Src[x + y * imageW].w = 255;
 		}
 	}
+	*/
 	initOpenGLBuffers(imageW, imageH);
 	displayFunc();
 	glutMainLoop();
 }
 
 // OpenGL display function
-void displayFunc(void)
-{
+void displayFunc(void) {
 	// render the Mandelbrot image
 	//renderImage(true, g_isJuliaSet, precisionMode);
 
@@ -99,8 +96,7 @@ void displayFunc(void)
 	glutSwapBuffers();
 }
 
-void initOpenGLBuffers(int w, int h)
-{
+void initOpenGLBuffers(int w, int h) {
 	// allocate new buffers
 	printf("Creating GL texture...\n");
 	glEnable(GL_TEXTURE_2D);

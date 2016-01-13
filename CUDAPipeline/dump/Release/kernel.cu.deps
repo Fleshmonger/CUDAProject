@@ -1,0 +1,859 @@
+D:\Tools\CUDA\\include\cuda_runtime.h
+d:\tools\cuda\include\host_config.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\crtdefs.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\sal.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\ConcurrencySal.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\vadefs.h
+d:\tools\cuda\include\builtin_types.h
+d:\tools\cuda\include\device_types.h
+d:\tools\cuda\include\host_defines.h
+d:\tools\cuda\include\driver_types.h
+d:\tools\cuda\include\host_defines.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\limits.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\crtdefs.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\stddef.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\crtdefs.h
+d:\tools\cuda\include\surface_types.h
+d:\tools\cuda\include\driver_types.h
+d:\tools\cuda\include\texture_types.h
+d:\tools\cuda\include\driver_types.h
+d:\tools\cuda\include\vector_types.h
+d:\tools\cuda\include\builtin_types.h
+d:\tools\cuda\include\device_types.h
+d:\tools\cuda\include\driver_types.h
+d:\tools\cuda\include\surface_types.h
+d:\tools\cuda\include\texture_types.h
+d:\tools\cuda\include\vector_types.h
+d:\tools\cuda\include\host_defines.h
+d:\tools\cuda\include\channel_descriptor.h
+d:\tools\cuda\include\driver_types.h
+d:\tools\cuda\include\cuda_runtime_api.h
+d:\tools\cuda\include\host_defines.h
+d:\tools\cuda\include\builtin_types.h
+d:\tools\cuda\include\device_types.h
+d:\tools\cuda\include\driver_types.h
+d:\tools\cuda\include\surface_types.h
+d:\tools\cuda\include\texture_types.h
+d:\tools\cuda\include\vector_types.h
+d:\tools\cuda\include\cuda_device_runtime_api.h
+d:\tools\cuda\include\driver_types.h
+d:\tools\cuda\include\host_defines.h
+d:\tools\cuda\include\host_defines.h
+d:\tools\cuda\include\vector_types.h
+d:\tools\cuda\include\cuda_runtime_api.h
+d:\tools\cuda\include\driver_functions.h
+d:\tools\cuda\include\builtin_types.h
+d:\tools\cuda\include\device_types.h
+d:\tools\cuda\include\driver_types.h
+d:\tools\cuda\include\surface_types.h
+d:\tools\cuda\include\texture_types.h
+d:\tools\cuda\include\vector_types.h
+d:\tools\cuda\include\host_defines.h
+d:\tools\cuda\include\driver_types.h
+d:\tools\cuda\include\host_defines.h
+d:\tools\cuda\include\vector_functions.h
+d:\tools\cuda\include\builtin_types.h
+d:\tools\cuda\include\device_types.h
+d:\tools\cuda\include\driver_types.h
+d:\tools\cuda\include\surface_types.h
+d:\tools\cuda\include\texture_types.h
+d:\tools\cuda\include\vector_types.h
+d:\tools\cuda\include\host_defines.h
+d:\tools\cuda\include\vector_types.h
+d:\tools\cuda\include\vector_functions.hpp
+d:\tools\cuda\include\builtin_types.h
+d:\tools\cuda\include\device_types.h
+d:\tools\cuda\include\driver_types.h
+d:\tools\cuda\include\surface_types.h
+d:\tools\cuda\include\texture_types.h
+d:\tools\cuda\include\vector_types.h
+d:\tools\cuda\include\host_defines.h
+d:\tools\cuda\include\vector_types.h
+d:\tools\cuda\include\common_functions.h
+d:\tools\cuda\include\builtin_types.h
+d:\tools\cuda\include\device_types.h
+d:\tools\cuda\include\driver_types.h
+d:\tools\cuda\include\surface_types.h
+d:\tools\cuda\include\texture_types.h
+d:\tools\cuda\include\vector_types.h
+d:\tools\cuda\include\host_defines.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\string.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\crtdefs.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\time.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\crtdefs.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\wtime.inl
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\time.inl
+d:\tools\cuda\include\math_functions.h
+d:\tools\cuda\include\builtin_types.h
+d:\tools\cuda\include\device_types.h
+d:\tools\cuda\include\driver_types.h
+d:\tools\cuda\include\surface_types.h
+d:\tools\cuda\include\texture_types.h
+d:\tools\cuda\include\vector_types.h
+d:\tools\cuda\include\host_defines.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\math.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\crtdefs.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\stdlib.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\crtdefs.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\cmath
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\yvals.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\xkeycheck.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\crtdefs.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\use_ansi.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\math.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\xtgmath.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\xtr1common
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\cstdlib
+d:\tools\cuda\include\math_functions.hpp
+d:\tools\cuda\include\builtin_types.h
+d:\tools\cuda\include\device_types.h
+d:\tools\cuda\include\driver_types.h
+d:\tools\cuda\include\surface_types.h
+d:\tools\cuda\include\texture_types.h
+d:\tools\cuda\include\vector_types.h
+d:\tools\cuda\include\host_defines.h
+d:\tools\cuda\include\math_functions_dbl_ptx3.h
+d:\tools\cuda\include\math_functions_dbl_ptx3.hpp
+d:\tools\cuda\include\cuda_surface_types.h
+d:\tools\cuda\include\builtin_types.h
+d:\tools\cuda\include\device_types.h
+d:\tools\cuda\include\driver_types.h
+d:\tools\cuda\include\surface_types.h
+d:\tools\cuda\include\texture_types.h
+d:\tools\cuda\include\vector_types.h
+d:\tools\cuda\include\channel_descriptor.h
+d:\tools\cuda\include\driver_types.h
+d:\tools\cuda\include\host_defines.h
+d:\tools\cuda\include\surface_types.h
+d:\tools\cuda\include\cuda_texture_types.h
+d:\tools\cuda\include\builtin_types.h
+d:\tools\cuda\include\device_types.h
+d:\tools\cuda\include\driver_types.h
+d:\tools\cuda\include\surface_types.h
+d:\tools\cuda\include\texture_types.h
+d:\tools\cuda\include\vector_types.h
+d:\tools\cuda\include\channel_descriptor.h
+d:\tools\cuda\include\driver_types.h
+d:\tools\cuda\include\host_defines.h
+d:\tools\cuda\include\texture_types.h
+d:\tools\cuda\include\device_functions.h
+d:\tools\cuda\include\builtin_types.h
+d:\tools\cuda\include\device_types.h
+d:\tools\cuda\include\driver_types.h
+d:\tools\cuda\include\surface_types.h
+d:\tools\cuda\include\texture_types.h
+d:\tools\cuda\include\vector_types.h
+d:\tools\cuda\include\device_types.h
+d:\tools\cuda\include\host_defines.h
+d:\tools\cuda\include\device_functions.hpp
+d:\tools\cuda\include\builtin_types.h
+d:\tools\cuda\include\device_types.h
+d:\tools\cuda\include\driver_types.h
+d:\tools\cuda\include\surface_types.h
+d:\tools\cuda\include\texture_types.h
+d:\tools\cuda\include\vector_types.h
+d:\tools\cuda\include\device_types.h
+d:\tools\cuda\include\host_defines.h
+d:\tools\cuda\include\device_atomic_functions.h
+d:\tools\cuda\include\builtin_types.h
+d:\tools\cuda\include\device_types.h
+d:\tools\cuda\include\driver_types.h
+d:\tools\cuda\include\surface_types.h
+d:\tools\cuda\include\texture_types.h
+d:\tools\cuda\include\vector_types.h
+d:\tools\cuda\include\host_defines.h
+d:\tools\cuda\include\builtin_types.h
+d:\tools\cuda\include\device_types.h
+d:\tools\cuda\include\driver_types.h
+d:\tools\cuda\include\surface_types.h
+d:\tools\cuda\include\texture_types.h
+d:\tools\cuda\include\vector_types.h
+d:\tools\cuda\include\host_defines.h
+d:\tools\cuda\include\device_atomic_functions.hpp
+d:\tools\cuda\include\builtin_types.h
+d:\tools\cuda\include\device_types.h
+d:\tools\cuda\include\driver_types.h
+d:\tools\cuda\include\surface_types.h
+d:\tools\cuda\include\texture_types.h
+d:\tools\cuda\include\vector_types.h
+d:\tools\cuda\include\host_defines.h
+d:\tools\cuda\include\builtin_types.h
+d:\tools\cuda\include\device_types.h
+d:\tools\cuda\include\driver_types.h
+d:\tools\cuda\include\surface_types.h
+d:\tools\cuda\include\texture_types.h
+d:\tools\cuda\include\vector_types.h
+d:\tools\cuda\include\host_defines.h
+d:\tools\cuda\include\device_double_functions.h
+d:\tools\cuda\include\builtin_types.h
+d:\tools\cuda\include\device_types.h
+d:\tools\cuda\include\driver_types.h
+d:\tools\cuda\include\surface_types.h
+d:\tools\cuda\include\texture_types.h
+d:\tools\cuda\include\vector_types.h
+d:\tools\cuda\include\device_types.h
+d:\tools\cuda\include\host_defines.h
+d:\tools\cuda\include\device_double_functions.hpp
+d:\tools\cuda\include\builtin_types.h
+d:\tools\cuda\include\device_types.h
+d:\tools\cuda\include\driver_types.h
+d:\tools\cuda\include\surface_types.h
+d:\tools\cuda\include\texture_types.h
+d:\tools\cuda\include\vector_types.h
+d:\tools\cuda\include\device_types.h
+d:\tools\cuda\include\host_defines.h
+d:\tools\cuda\include\sm_20_atomic_functions.h
+d:\tools\cuda\include\builtin_types.h
+d:\tools\cuda\include\device_types.h
+d:\tools\cuda\include\driver_types.h
+d:\tools\cuda\include\surface_types.h
+d:\tools\cuda\include\texture_types.h
+d:\tools\cuda\include\vector_types.h
+d:\tools\cuda\include\host_defines.h
+d:\tools\cuda\include\sm_20_atomic_functions.hpp
+d:\tools\cuda\include\builtin_types.h
+d:\tools\cuda\include\device_types.h
+d:\tools\cuda\include\driver_types.h
+d:\tools\cuda\include\surface_types.h
+d:\tools\cuda\include\texture_types.h
+d:\tools\cuda\include\vector_types.h
+d:\tools\cuda\include\host_defines.h
+d:\tools\cuda\include\sm_32_atomic_functions.h
+d:\tools\cuda\include\builtin_types.h
+d:\tools\cuda\include\device_types.h
+d:\tools\cuda\include\driver_types.h
+d:\tools\cuda\include\surface_types.h
+d:\tools\cuda\include\texture_types.h
+d:\tools\cuda\include\vector_types.h
+d:\tools\cuda\include\host_defines.h
+d:\tools\cuda\include\sm_32_atomic_functions.hpp
+d:\tools\cuda\include\builtin_types.h
+d:\tools\cuda\include\device_types.h
+d:\tools\cuda\include\driver_types.h
+d:\tools\cuda\include\surface_types.h
+d:\tools\cuda\include\texture_types.h
+d:\tools\cuda\include\vector_types.h
+d:\tools\cuda\include\host_defines.h
+d:\tools\cuda\include\sm_35_atomic_functions.h
+d:\tools\cuda\include\sm_32_atomic_functions.h
+d:\tools\cuda\include\sm_20_intrinsics.h
+d:\tools\cuda\include\builtin_types.h
+d:\tools\cuda\include\device_types.h
+d:\tools\cuda\include\driver_types.h
+d:\tools\cuda\include\surface_types.h
+d:\tools\cuda\include\texture_types.h
+d:\tools\cuda\include\vector_types.h
+d:\tools\cuda\include\device_types.h
+d:\tools\cuda\include\host_defines.h
+d:\tools\cuda\include\sm_20_intrinsics.hpp
+d:\tools\cuda\include\builtin_types.h
+d:\tools\cuda\include\device_types.h
+d:\tools\cuda\include\driver_types.h
+d:\tools\cuda\include\surface_types.h
+d:\tools\cuda\include\texture_types.h
+d:\tools\cuda\include\vector_types.h
+d:\tools\cuda\include\device_types.h
+d:\tools\cuda\include\host_defines.h
+d:\tools\cuda\include\sm_30_intrinsics.h
+d:\tools\cuda\include\builtin_types.h
+d:\tools\cuda\include\device_types.h
+d:\tools\cuda\include\driver_types.h
+d:\tools\cuda\include\surface_types.h
+d:\tools\cuda\include\texture_types.h
+d:\tools\cuda\include\vector_types.h
+d:\tools\cuda\include\device_types.h
+d:\tools\cuda\include\host_defines.h
+d:\tools\cuda\include\sm_30_intrinsics.hpp
+d:\tools\cuda\include\builtin_types.h
+d:\tools\cuda\include\device_types.h
+d:\tools\cuda\include\driver_types.h
+d:\tools\cuda\include\surface_types.h
+d:\tools\cuda\include\texture_types.h
+d:\tools\cuda\include\vector_types.h
+d:\tools\cuda\include\device_types.h
+d:\tools\cuda\include\host_defines.h
+d:\tools\cuda\include\sm_32_intrinsics.h
+d:\tools\cuda\include\builtin_types.h
+d:\tools\cuda\include\device_types.h
+d:\tools\cuda\include\driver_types.h
+d:\tools\cuda\include\surface_types.h
+d:\tools\cuda\include\texture_types.h
+d:\tools\cuda\include\vector_types.h
+d:\tools\cuda\include\device_types.h
+d:\tools\cuda\include\host_defines.h
+d:\tools\cuda\include\sm_32_intrinsics.hpp
+d:\tools\cuda\include\builtin_types.h
+d:\tools\cuda\include\device_types.h
+d:\tools\cuda\include\driver_types.h
+d:\tools\cuda\include\surface_types.h
+d:\tools\cuda\include\texture_types.h
+d:\tools\cuda\include\vector_types.h
+d:\tools\cuda\include\device_types.h
+d:\tools\cuda\include\host_defines.h
+d:\tools\cuda\include\sm_35_intrinsics.h
+d:\tools\cuda\include\sm_32_intrinsics.h
+d:\tools\cuda\include\surface_functions.h
+d:\tools\cuda\include\builtin_types.h
+d:\tools\cuda\include\device_types.h
+d:\tools\cuda\include\driver_types.h
+d:\tools\cuda\include\surface_types.h
+d:\tools\cuda\include\texture_types.h
+d:\tools\cuda\include\vector_types.h
+d:\tools\cuda\include\cuda_surface_types.h
+d:\tools\cuda\include\host_defines.h
+d:\tools\cuda\include\surface_types.h
+d:\tools\cuda\include\vector_functions.h
+d:\tools\cuda\include\vector_types.h
+d:\tools\cuda\include\surface_functions.hpp
+d:\tools\cuda\include\builtin_types.h
+d:\tools\cuda\include\device_types.h
+d:\tools\cuda\include\driver_types.h
+d:\tools\cuda\include\surface_types.h
+d:\tools\cuda\include\texture_types.h
+d:\tools\cuda\include\vector_types.h
+d:\tools\cuda\include\cuda_surface_types.h
+d:\tools\cuda\include\host_defines.h
+d:\tools\cuda\include\surface_types.h
+d:\tools\cuda\include\vector_functions.h
+d:\tools\cuda\include\vector_types.h
+d:\tools\cuda\include\texture_fetch_functions.h
+d:\tools\cuda\include\builtin_types.h
+d:\tools\cuda\include\device_types.h
+d:\tools\cuda\include\driver_types.h
+d:\tools\cuda\include\surface_types.h
+d:\tools\cuda\include\texture_types.h
+d:\tools\cuda\include\vector_types.h
+d:\tools\cuda\include\cuda_texture_types.h
+d:\tools\cuda\include\host_defines.h
+d:\tools\cuda\include\texture_types.h
+d:\tools\cuda\include\vector_functions.h
+d:\tools\cuda\include\vector_types.h
+d:\tools\cuda\include\texture_fetch_functions.hpp
+d:\tools\cuda\include\builtin_types.h
+d:\tools\cuda\include\device_types.h
+d:\tools\cuda\include\driver_types.h
+d:\tools\cuda\include\surface_types.h
+d:\tools\cuda\include\texture_types.h
+d:\tools\cuda\include\vector_types.h
+d:\tools\cuda\include\cuda_texture_types.h
+d:\tools\cuda\include\host_defines.h
+d:\tools\cuda\include\texture_types.h
+d:\tools\cuda\include\vector_functions.h
+d:\tools\cuda\include\vector_types.h
+d:\tools\cuda\include\texture_indirect_functions.h
+d:\tools\cuda\include\builtin_types.h
+d:\tools\cuda\include\device_types.h
+d:\tools\cuda\include\driver_types.h
+d:\tools\cuda\include\surface_types.h
+d:\tools\cuda\include\texture_types.h
+d:\tools\cuda\include\vector_types.h
+d:\tools\cuda\include\host_defines.h
+d:\tools\cuda\include\vector_functions.h
+d:\tools\cuda\include\texture_indirect_functions.hpp
+d:\tools\cuda\include\builtin_types.h
+d:\tools\cuda\include\device_types.h
+d:\tools\cuda\include\driver_types.h
+d:\tools\cuda\include\surface_types.h
+d:\tools\cuda\include\texture_types.h
+d:\tools\cuda\include\vector_types.h
+d:\tools\cuda\include\host_defines.h
+d:\tools\cuda\include\vector_functions.h
+d:\tools\cuda\include\surface_indirect_functions.h
+d:\tools\cuda\include\builtin_types.h
+d:\tools\cuda\include\device_types.h
+d:\tools\cuda\include\driver_types.h
+d:\tools\cuda\include\surface_types.h
+d:\tools\cuda\include\texture_types.h
+d:\tools\cuda\include\vector_types.h
+d:\tools\cuda\include\host_defines.h
+d:\tools\cuda\include\vector_functions.h
+d:\tools\cuda\include\surface_indirect_functions.hpp
+d:\tools\cuda\include\builtin_types.h
+d:\tools\cuda\include\device_types.h
+d:\tools\cuda\include\driver_types.h
+d:\tools\cuda\include\surface_types.h
+d:\tools\cuda\include\texture_types.h
+d:\tools\cuda\include\vector_types.h
+d:\tools\cuda\include\host_defines.h
+d:\tools\cuda\include\vector_functions.h
+d:\tools\cuda\include\device_launch_parameters.h
+d:\tools\cuda\include\vector_types.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\vector
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\xmemory
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\xmemory0
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\limits
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\ymath.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\cfloat
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\float.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\crtdefs.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\crtwrn.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\crtdefs.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\climits
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\cwchar
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\wchar.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\crtdefs.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\swprintf.inl
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\xstddef
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\cstddef
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\initializer_list
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\new
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\exception
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\eh.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\crtdefs.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\malloc.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\crtdefs.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\xutility
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\utility
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\iosfwd
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\cstdio
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\stdio.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\crtdefs.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\cstring
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\crtdbg.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\crtdefs.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\type_traits
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\xrefwrap
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\xatomic0.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\intrin.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\crtdefs.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\setjmp.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\crtdefs.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\immintrin.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\wmmintrin.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\nmmintrin.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\smmintrin.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\tmmintrin.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\pmmintrin.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\emmintrin.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\xmmintrin.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\mmintrin.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\crtdefs.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\ammintrin.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\stdexcept
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\xstring
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\iostream
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\istream
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\ostream
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\ios
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\xlocnum
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\streambuf
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\xiosbase
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\xlocale
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\typeinfo
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\xlocinfo
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\xlocinfo.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\ctype.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\crtdefs.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\locale.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\crtdefs.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\xdebug
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\xfacet
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\system_error
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\cerrno
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\errno.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\crtdefs.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\share.h
+D:\Tools\CUDA\\include\thrust/transform.h
+D:\Tools\CUDA\\include\thrust/detail/config.h
+D:\Tools\CUDA\\include\thrust/detail/config/config.h
+D:\Tools\CUDA\\include\thrust/detail/config/simple_defines.h
+D:\Tools\CUDA\\include\thrust/detail/config/compiler.h
+D:\Tools\CUDA\\include\cuda.h
+D:\Tools\CUDA\\include\thrust/detail/config/host_system.h
+D:\Tools\CUDA\\include\thrust/detail/config/device_system.h
+D:\Tools\CUDA\\include\thrust/detail/config/host_device.h
+D:\Tools\CUDA\\include\thrust/detail/config/debug.h
+D:\Tools\CUDA\\include\thrust/detail/config/compiler_fence.h
+D:\Tools\CUDA\\include\thrust/detail/config/forceinline.h
+D:\Tools\CUDA\\include\thrust/detail/config/exec_check_disable.h
+D:\Tools\CUDA\\include\thrust/detail/config/global_workarounds.h
+D:\Tools\CUDA\\include\thrust/detail/execution_policy.h
+D:\Tools\CUDA\\include\thrust/detail/transform.inl
+D:\Tools\CUDA\\include\thrust/iterator/iterator_traits.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\iterator
+D:\Tools\CUDA\\include\thrust/iterator/detail/iterator_traversal_tags.h
+D:\Tools\CUDA\\include\thrust/iterator/detail/host_system_tag.h
+D:\Tools\CUDA\\include\thrust/system/cpp/detail/execution_policy.h
+D:\Tools\CUDA\\include\thrust/system/detail/sequential/execution_policy.h
+D:\Tools\CUDA\\include\thrust/iterator/detail/device_system_tag.h
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/execution_policy.h
+D:\Tools\CUDA\\include\thrust/iterator/detail/any_system_tag.h
+D:\Tools\CUDA\\include\thrust/iterator/detail/iterator_traits.inl
+D:\Tools\CUDA\\include\thrust/iterator/iterator_categories.h
+D:\Tools\CUDA\\include\thrust/iterator/detail/iterator_category_with_system_and_traversal.h
+D:\Tools\CUDA\\include\thrust/iterator/detail/universal_categories.h
+D:\Tools\CUDA\\include\thrust/iterator/detail/iterator_category_to_traversal.h
+D:\Tools\CUDA\\include\thrust/iterator/detail/iterator_category_to_system.h
+D:\Tools\CUDA\\include\thrust/detail/type_traits.h
+D:\Tools\CUDA\\include\thrust/detail/type_traits/has_trivial_assign.h
+D:\Tools\CUDA\\include\thrust/system/detail/generic/select_system.h
+D:\Tools\CUDA\\include\thrust/detail/type_traits/is_metafunction_defined.h
+D:\Tools\CUDA\\include\thrust/detail/type_traits/has_nested_type.h
+D:\Tools\CUDA\\include\thrust/iterator/detail/minimum_system.h
+D:\Tools\CUDA\\include\thrust/detail/type_traits/minimum_type.h
+D:\Tools\CUDA\\include\thrust/system/detail/generic/type_traits.h
+D:\Tools\CUDA\\include\thrust/system/detail/generic/transform.h
+D:\Tools\CUDA\\include\thrust/system/detail/generic/tag.h
+D:\Tools\CUDA\\include\thrust/system/detail/generic/transform.inl
+D:\Tools\CUDA\\include\thrust/for_each.h
+D:\Tools\CUDA\\include\thrust/detail/for_each.inl
+D:\Tools\CUDA\\include\thrust/system/detail/generic/for_each.h
+D:\Tools\CUDA\\include\thrust/detail/static_assert.h
+D:\Tools\CUDA\\include\thrust/system/detail/adl/for_each.h
+D:\Tools\CUDA\\include\thrust/system/detail/sequential/for_each.h
+D:\Tools\CUDA\\include\thrust/detail/function.h
+D:\Tools\CUDA\\include\thrust/detail/raw_reference_cast.h
+D:\Tools\CUDA\\include\thrust/detail/raw_pointer_cast.h
+D:\Tools\CUDA\\include\thrust/detail/type_traits/pointer_traits.h
+D:\Tools\CUDA\\include\thrust/detail/tuple_transform.h
+D:\Tools\CUDA\\include\thrust/tuple.h
+D:\Tools\CUDA\\include\thrust/detail/tuple.inl
+D:\Tools\CUDA\\include\thrust/detail/swap.h
+D:\Tools\CUDA\\include\thrust/pair.h
+D:\Tools\CUDA\\include\thrust/detail/pair.inl
+D:\Tools\CUDA\\include\thrust/detail/tuple_meta_transform.h
+D:\Tools\CUDA\\include\thrust/iterator/detail/tuple_of_iterator_references.h
+D:\Tools\CUDA\\include\thrust/detail/reference_forward_declaration.h
+D:\Tools\CUDA\\include\thrust/detail/use_default.h
+D:\Tools\CUDA\\include\thrust/system/cpp/detail/for_each.h
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/for_each.h
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/for_each.inl
+D:\Tools\CUDA\\include\thrust/distance.h
+D:\Tools\CUDA\\include\thrust/detail/distance.inl
+D:\Tools\CUDA\\include\thrust/advance.h
+D:\Tools\CUDA\\include\thrust/detail/advance.inl
+D:\Tools\CUDA\\include\thrust/system/detail/generic/advance.h
+D:\Tools\CUDA\\include\thrust/system/detail/generic/advance.inl
+D:\Tools\CUDA\\include\thrust/system/detail/generic/distance.h
+D:\Tools\CUDA\\include\thrust/system/detail/generic/distance.inl
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/bulk.h
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/bulk/bulk.hpp
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/bulk/detail/config.hpp
+D:\Tools\CUDA\\include\thrust/version.h
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/bulk/execution_policy.hpp
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/bulk/future.hpp
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/bulk/detail/guarded_cuda_runtime_api.hpp
+D:\Tools\CUDA\\include\cuda_runtime_api.h
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/bulk/detail/throw_on_error.hpp
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/bulk/detail/terminate.hpp
+D:\Tools\CUDA\\include\thrust/system_error.h
+D:\Tools\CUDA\\include\thrust/system/error_code.h
+D:\Tools\CUDA\\include\thrust/system/detail/errno.h
+D:\Tools\CUDA\\include\thrust/system/detail/error_category.inl
+D:\Tools\CUDA\\include\thrust/functional.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\functional
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\xfunctional
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\tuple
+D:\Tools\CUDA\\include\thrust/detail/functional/placeholder.h
+D:\Tools\CUDA\\include\thrust/detail/functional/actor.h
+D:\Tools\CUDA\\include\thrust/detail/functional/value.h
+D:\Tools\CUDA\\include\thrust/detail/functional/composite.h
+D:\Tools\CUDA\\include\thrust/detail/functional/operators/assignment_operator.h
+D:\Tools\CUDA\\include\thrust/detail/functional/operators/operator_adaptors.h
+D:\Tools\CUDA\\include\thrust/detail/type_traits/result_of.h
+D:\Tools\CUDA\\include\thrust/detail/type_traits/function_traits.h
+D:\Tools\CUDA\\include\thrust/detail/functional/actor.inl
+D:\Tools\CUDA\\include\thrust/detail/functional/argument.h
+D:\Tools\CUDA\\include\thrust/detail/functional.inl
+D:\Tools\CUDA\\include\thrust/detail/functional/operators.h
+D:\Tools\CUDA\\include\thrust/detail/functional/operators/arithmetic_operators.h
+D:\Tools\CUDA\\include\thrust/detail/functional/operators/relational_operators.h
+D:\Tools\CUDA\\include\thrust/detail/functional/operators/logical_operators.h
+D:\Tools\CUDA\\include\thrust/detail/functional/operators/bitwise_operators.h
+D:\Tools\CUDA\\include\thrust/detail/functional/operators/compound_assignment_operators.h
+D:\Tools\CUDA\\include\thrust/system/detail/error_code.inl
+D:\Tools\CUDA\\include\thrust/system/detail/error_condition.inl
+D:\Tools\CUDA\\include\thrust/system/system_error.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\string
+D:\Tools\CUDA\\include\thrust/system/detail/system_error.inl
+D:\Tools\CUDA\\include\thrust/system/cuda/error.h
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/guarded_driver_types.h
+D:\Tools\CUDA\\include\driver_types.h
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/error.inl
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/guarded_cuda_runtime_api.h
+D:\Tools\CUDA\\include\cuda_runtime_api.h
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/bulk/detail/cuda_launcher/runtime_introspection.hpp
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/bulk/detail/cuda_launcher/cuda_launch_config.hpp
+D:\Tools\CUDA\\include\thrust/detail/minmax.h
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/bulk/detail/cuda_launcher/runtime_introspection.inl
+D:\Tools\CUDA\\include\thrust/detail/util/blocking.h
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/bulk/choose_sizes.hpp
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/bulk/detail/choose_sizes.inl
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/bulk/detail/closure.hpp
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/bulk/detail/apply_from_tuple.hpp
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/bulk/detail/cuda_launcher/cuda_launcher.hpp
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/bulk/detail/alignment.hpp
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/bulk/detail/cuda_task.hpp
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/bulk/malloc.hpp
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/bulk/detail/pointer_traits.hpp
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/bulk/uninitialized.hpp
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/bulk/detail/tuple_transform.hpp
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/bulk/detail/tuple_meta_transform.hpp
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/bulk/detail/cuda_launcher/triple_chevron_launcher.hpp
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/bulk/detail/cuda_launcher/parameter_ptr.hpp
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/bulk/detail/synchronize.hpp
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/bulk/async.hpp
+D:\Tools\CUDA\\include\thrust/detail/cstdint.h
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/bulk/detail/async.inl
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/bulk/algorithm.hpp
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/bulk/algorithm/copy.hpp
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/bulk/detail/is_contiguous_iterator.hpp
+D:\Tools\CUDA\\include\thrust/iterator/detail/is_trivial_iterator.h
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/bulk/algorithm/reduce.hpp
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/bulk/iterator/strided_iterator.hpp
+D:\Tools\CUDA\\include\thrust/iterator/iterator_adaptor.h
+D:\Tools\CUDA\\include\thrust/iterator/iterator_facade.h
+D:\Tools\CUDA\\include\thrust/iterator/detail/iterator_facade_category.h
+D:\Tools\CUDA\\include\thrust/iterator/detail/is_iterator_category.h
+D:\Tools\CUDA\\include\thrust/iterator/detail/distance_from_result.h
+D:\Tools\CUDA\\include\thrust/iterator/detail/iterator_adaptor_base.h
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/bulk/algorithm/scan.hpp
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/bulk/algorithm/accumulate.hpp
+D:\Tools\CUDA\\include\thrust/detail/type_traits/iterator/is_output_iterator.h
+D:\Tools\CUDA\\include\thrust/iterator/detail/any_assign.h
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/bulk/algorithm/merge.hpp
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/bulk/algorithm/gather.hpp
+D:\Tools\CUDA\\include\thrust/iterator/permutation_iterator.h
+D:\Tools\CUDA\\include\thrust/iterator/detail/permutation_iterator_base.h
+D:\Tools\CUDA\\include\thrust/iterator/counting_iterator.h
+D:\Tools\CUDA\\include\thrust/iterator/detail/counting_iterator.inl
+D:\Tools\CUDA\\include\thrust/detail/numeric_traits.h
+D:\Tools\CUDA\\include\thrust/iterator/detail/join_iterator.h
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/bulk/algorithm/scatter.hpp
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/bulk/algorithm/adjacent_difference.hpp
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/bulk/algorithm/reduce_by_key.hpp
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/bulk/detail/head_flags.hpp
+D:\Tools\CUDA\\include\thrust/iterator/transform_iterator.h
+D:\Tools\CUDA\\include\thrust/iterator/detail/transform_iterator.inl
+D:\Tools\CUDA\\include\thrust/iterator/zip_iterator.h
+D:\Tools\CUDA\\include\thrust/iterator/detail/zip_iterator_base.h
+D:\Tools\CUDA\\include\thrust/iterator/detail/minimum_category.h
+D:\Tools\CUDA\\include\thrust/iterator/detail/zip_iterator.inl
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/bulk/detail/tail_flags.hpp
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/bulk/algorithm/sort.hpp
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/bulk/algorithm/detail/stable_merge_sort.hpp
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/bulk/iterator.hpp
+D:\Tools\CUDA\\include\thrust/detail/seq.h
+D:\Tools\CUDA\\include\thrust/detail/execute_with_allocator.h
+D:\Tools\CUDA\\include\thrust/detail/allocator/allocator_traits.h
+D:\Tools\CUDA\\include\thrust/detail/type_traits/has_member_function.h
+D:\Tools\CUDA\\include\thrust/detail/allocator/allocator_traits.inl
+D:\Tools\CUDA\\include\thrust/detail/type_traits/is_call_possible.h
+D:\Tools\CUDA\\include\thrust/detail/integer_traits.h
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/execute_on_stream.h
+D:\Tools\CUDA\\include\thrust/detail/internal_functional.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\memory
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\stdint.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\crtdefs.h
+D:\Tools\CUDA\\include\thrust/system/detail/adl/transform.h
+D:\Tools\CUDA\\include\thrust/system/detail/sequential/transform.h
+D:\Tools\CUDA\\include\thrust/system/cpp/detail/transform.h
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/transform.h
+D:\Tools\CUDA\\include\thrust/host_vector.h
+D:\Tools\CUDA\\include\thrust/detail/vector_base.h
+D:\Tools\CUDA\\include\thrust/iterator/detail/normal_iterator.h
+D:\Tools\CUDA\\include\thrust/iterator/reverse_iterator.h
+D:\Tools\CUDA\\include\thrust/iterator/detail/reverse_iterator_base.h
+D:\Tools\CUDA\\include\thrust/iterator/detail/reverse_iterator.inl
+D:\Tools\CUDA\\include\thrust/detail/contiguous_storage.h
+D:\Tools\CUDA\\include\thrust/detail/contiguous_storage.inl
+D:\Tools\CUDA\\include\thrust/detail/allocator/copy_construct_range.h
+D:\Tools\CUDA\\include\thrust/detail/allocator/copy_construct_range.inl
+D:\Tools\CUDA\\include\thrust/detail/copy.h
+D:\Tools\CUDA\\include\thrust/detail/copy.inl
+D:\Tools\CUDA\\include\thrust/system/detail/generic/copy.h
+D:\Tools\CUDA\\include\thrust/system/detail/generic/copy.inl
+D:\Tools\CUDA\\include\thrust/system/detail/adl/copy.h
+D:\Tools\CUDA\\include\thrust/system/detail/sequential/copy.h
+D:\Tools\CUDA\\include\thrust/system/detail/sequential/copy.inl
+D:\Tools\CUDA\\include\thrust/detail/dispatch/is_trivial_copy.h
+D:\Tools\CUDA\\include\thrust/system/detail/sequential/general_copy.h
+D:\Tools\CUDA\\include\thrust/system/detail/sequential/trivial_copy.h
+D:\Tools\CUDA\\include\thrust/system/cpp/detail/copy.h
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/copy.h
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/copy.inl
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/copy_device_to_device.h
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/copy_device_to_device.inl
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/copy_cross_system.h
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/copy_cross_system.inl
+D:\Tools\CUDA\\include\thrust/detail/temporary_array.h
+D:\Tools\CUDA\\include\thrust/iterator/detail/tagged_iterator.h
+D:\Tools\CUDA\\include\thrust/detail/allocator/temporary_allocator.h
+D:\Tools\CUDA\\include\thrust/detail/allocator/tagged_allocator.h
+D:\Tools\CUDA\\include\thrust/detail/allocator/tagged_allocator.inl
+D:\Tools\CUDA\\include\thrust/memory.h
+D:\Tools\CUDA\\include\thrust/detail/pointer.h
+D:\Tools\CUDA\\include\thrust/detail/pointer.inl
+D:\Tools\CUDA\\include\thrust/detail/reference.h
+D:\Tools\CUDA\\include\thrust/detail/reference.inl
+D:\Tools\CUDA\\include\thrust/system/detail/generic/memory.h
+D:\Tools\CUDA\\include\thrust/system/detail/generic/memory.inl
+D:\Tools\CUDA\\include\thrust/system/detail/adl/malloc_and_free.h
+D:\Tools\CUDA\\include\thrust/system/detail/sequential/malloc_and_free.h
+D:\Tools\CUDA\\include\thrust/system/cpp/detail/malloc_and_free.h
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/malloc_and_free.h
+D:\Tools\CUDA\\include\thrust/system/detail/bad_alloc.h
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/throw_on_error.h
+D:\Tools\CUDA\\include\thrust/detail/malloc_and_free.h
+D:\Tools\CUDA\\include\thrust/system/detail/adl/get_value.h
+D:\Tools\CUDA\\include\thrust/system/detail/sequential/get_value.h
+D:\Tools\CUDA\\include\thrust/system/cpp/detail/get_value.h
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/get_value.h
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/assign_value.h
+D:\Tools\CUDA\\include\thrust/system/detail/adl/assign_value.h
+D:\Tools\CUDA\\include\thrust/system/detail/sequential/assign_value.h
+D:\Tools\CUDA\\include\thrust/system/cpp/detail/assign_value.h
+D:\Tools\CUDA\\include\thrust/system/detail/adl/iter_swap.h
+D:\Tools\CUDA\\include\thrust/system/detail/sequential/iter_swap.h
+D:\Tools\CUDA\\include\thrust/system/cpp/detail/iter_swap.h
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/iter_swap.h
+D:\Tools\CUDA\\include\thrust/swap.h
+D:\Tools\CUDA\\include\thrust/detail/swap.inl
+D:\Tools\CUDA\\include\thrust/detail/swap_ranges.inl
+D:\Tools\CUDA\\include\thrust/system/detail/generic/swap_ranges.h
+D:\Tools\CUDA\\include\thrust/system/detail/generic/swap_ranges.inl
+D:\Tools\CUDA\\include\thrust/system/detail/adl/swap_ranges.h
+D:\Tools\CUDA\\include\thrust/system/detail/sequential/swap_ranges.h
+D:\Tools\CUDA\\include\thrust/system/cpp/detail/swap_ranges.h
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/swap_ranges.h
+D:\Tools\CUDA\\include\thrust/detail/temporary_buffer.h
+D:\Tools\CUDA\\include\thrust/system/detail/generic/temporary_buffer.h
+D:\Tools\CUDA\\include\thrust/system/detail/generic/temporary_buffer.inl
+D:\Tools\CUDA\\include\thrust/system/detail/adl/temporary_buffer.h
+D:\Tools\CUDA\\include\thrust/system/detail/sequential/temporary_buffer.h
+D:\Tools\CUDA\\include\thrust/system/cpp/detail/temporary_buffer.h
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/temporary_buffer.h
+D:\Tools\CUDA\\include\thrust/detail/allocator/temporary_allocator.inl
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\cassert
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\assert.h
+D:\Programs\Microsoft Visual Studio 12.0\VC\include\crtdefs.h
+D:\Tools\CUDA\\include\thrust/detail/allocator/no_throw_allocator.h
+D:\Tools\CUDA\\include\thrust/detail/temporary_array.inl
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/trivial_copy.h
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/trivial_copy.inl
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/trivial_copy.h
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/trivial_copy.h
+D:\Tools\CUDA\\include\thrust/detail/allocator/default_construct_range.h
+D:\Tools\CUDA\\include\thrust/detail/allocator/default_construct_range.inl
+D:\Tools\CUDA\\include\thrust/uninitialized_fill.h
+D:\Tools\CUDA\\include\thrust/detail/uninitialized_fill.inl
+D:\Tools\CUDA\\include\thrust/system/detail/generic/uninitialized_fill.h
+D:\Tools\CUDA\\include\thrust/system/detail/generic/uninitialized_fill.inl
+D:\Tools\CUDA\\include\thrust/fill.h
+D:\Tools\CUDA\\include\thrust/detail/fill.inl
+D:\Tools\CUDA\\include\thrust/system/detail/generic/fill.h
+D:\Tools\CUDA\\include\thrust/generate.h
+D:\Tools\CUDA\\include\thrust/detail/generate.inl
+D:\Tools\CUDA\\include\thrust/system/detail/generic/generate.h
+D:\Tools\CUDA\\include\thrust/system/detail/generic/generate.inl
+D:\Tools\CUDA\\include\thrust/system/detail/adl/generate.h
+D:\Tools\CUDA\\include\thrust/system/detail/sequential/generate.h
+D:\Tools\CUDA\\include\thrust/system/cpp/detail/generate.h
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/generate.h
+D:\Tools\CUDA\\include\thrust/system/detail/adl/fill.h
+D:\Tools\CUDA\\include\thrust/system/detail/sequential/fill.h
+D:\Tools\CUDA\\include\thrust/system/cpp/detail/fill.h
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/fill.h
+D:\Tools\CUDA\\include\thrust/system/detail/adl/uninitialized_fill.h
+D:\Tools\CUDA\\include\thrust/system/detail/sequential/uninitialized_fill.h
+D:\Tools\CUDA\\include\thrust/system/cpp/detail/uninitialized_fill.h
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/uninitialized_fill.h
+D:\Tools\CUDA\\include\thrust/detail/allocator/destroy_range.h
+D:\Tools\CUDA\\include\thrust/detail/allocator/destroy_range.inl
+D:\Tools\CUDA\\include\thrust/detail/allocator/fill_construct_range.h
+D:\Tools\CUDA\\include\thrust/detail/allocator/fill_construct_range.inl
+D:\Tools\CUDA\\include\thrust/detail/vector_base.inl
+D:\Tools\CUDA\\include\thrust/detail/overlapped_copy.h
+D:\Tools\CUDA\\include\thrust/equal.h
+D:\Tools\CUDA\\include\thrust/detail/equal.inl
+D:\Tools\CUDA\\include\thrust/system/detail/generic/equal.h
+D:\Tools\CUDA\\include\thrust/system/detail/generic/equal.inl
+D:\Tools\CUDA\\include\thrust/mismatch.h
+D:\Tools\CUDA\\include\thrust/detail/mismatch.inl
+D:\Tools\CUDA\\include\thrust/system/detail/generic/mismatch.h
+D:\Tools\CUDA\\include\thrust/system/detail/generic/mismatch.inl
+D:\Tools\CUDA\\include\thrust/find.h
+D:\Tools\CUDA\\include\thrust/detail/find.inl
+D:\Tools\CUDA\\include\thrust/system/detail/generic/find.h
+D:\Tools\CUDA\\include\thrust/system/detail/generic/find.inl
+D:\Tools\CUDA\\include\thrust/reduce.h
+D:\Tools\CUDA\\include\thrust/detail/reduce.inl
+D:\Tools\CUDA\\include\thrust/system/detail/generic/reduce.h
+D:\Tools\CUDA\\include\thrust/system/detail/generic/reduce.inl
+D:\Tools\CUDA\\include\thrust/system/detail/generic/reduce_by_key.h
+D:\Tools\CUDA\\include\thrust/system/detail/generic/reduce_by_key.inl
+D:\Tools\CUDA\\include\thrust/scatter.h
+D:\Tools\CUDA\\include\thrust/detail/scatter.inl
+D:\Tools\CUDA\\include\thrust/system/detail/generic/scatter.h
+D:\Tools\CUDA\\include\thrust/system/detail/generic/scatter.inl
+D:\Tools\CUDA\\include\thrust/system/detail/adl/scatter.h
+D:\Tools\CUDA\\include\thrust/system/detail/sequential/scatter.h
+D:\Tools\CUDA\\include\thrust/system/cpp/detail/scatter.h
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/scatter.h
+D:\Tools\CUDA\\include\thrust/scan.h
+D:\Tools\CUDA\\include\thrust/detail/scan.inl
+D:\Tools\CUDA\\include\thrust/system/detail/generic/scan.h
+D:\Tools\CUDA\\include\thrust/system/detail/generic/scan.inl
+D:\Tools\CUDA\\include\thrust/system/detail/generic/scan_by_key.h
+D:\Tools\CUDA\\include\thrust/system/detail/generic/scan_by_key.inl
+D:\Tools\CUDA\\include\thrust/replace.h
+D:\Tools\CUDA\\include\thrust/detail/replace.inl
+D:\Tools\CUDA\\include\thrust/system/detail/generic/replace.h
+D:\Tools\CUDA\\include\thrust/system/detail/generic/replace.inl
+D:\Tools\CUDA\\include\thrust/system/detail/adl/replace.h
+D:\Tools\CUDA\\include\thrust/system/detail/sequential/replace.h
+D:\Tools\CUDA\\include\thrust/system/cpp/detail/replace.h
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/replace.h
+D:\Tools\CUDA\\include\thrust/system/detail/adl/scan.h
+D:\Tools\CUDA\\include\thrust/system/detail/sequential/scan.h
+D:\Tools\CUDA\\include\thrust/system/cpp/detail/scan.h
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/scan.h
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/scan.inl
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/decomposition.h
+D:\Tools\CUDA\\include\thrust/system/detail/adl/scan_by_key.h
+D:\Tools\CUDA\\include\thrust/system/detail/sequential/scan_by_key.h
+D:\Tools\CUDA\\include\thrust/system/cpp/detail/scan_by_key.h
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/scan_by_key.h
+D:\Tools\CUDA\\include\thrust/system/detail/adl/reduce.h
+D:\Tools\CUDA\\include\thrust/system/detail/sequential/reduce.h
+D:\Tools\CUDA\\include\thrust/system/cpp/detail/reduce.h
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/reduce.h
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/reduce.inl
+D:\Tools\CUDA\\include\thrust/system/detail/adl/reduce_by_key.h
+D:\Tools\CUDA\\include\thrust/system/detail/sequential/reduce_by_key.h
+D:\Tools\CUDA\\include\thrust/detail/type_traits/algorithm/intermediate_type_from_function_and_iterators.h
+D:\Tools\CUDA\\include\thrust/system/cpp/detail/reduce_by_key.h
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/reduce_by_key.h
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/reduce_by_key.inl
+D:\Tools\CUDA\\include\thrust/iterator/constant_iterator.h
+D:\Tools\CUDA\\include\thrust/iterator/detail/constant_iterator_base.h
+D:\Tools\CUDA\\include\thrust/iterator/discard_iterator.h
+D:\Tools\CUDA\\include\thrust/iterator/detail/discard_iterator_base.h
+D:\Tools\CUDA\\include\thrust/detail/range/head_flags.h
+D:\Tools\CUDA\\include\thrust/detail/range/tail_flags.h
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/reduce_intervals.hpp
+D:\Tools\CUDA\\include\thrust/system/detail/adl/find.h
+D:\Tools\CUDA\\include\thrust/system/detail/sequential/find.h
+D:\Tools\CUDA\\include\thrust/system/cpp/detail/find.h
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/find.h
+D:\Tools\CUDA\\include\thrust/system/detail/adl/mismatch.h
+D:\Tools\CUDA\\include\thrust/system/detail/sequential/mismatch.h
+D:\Tools\CUDA\\include\thrust/system/cpp/detail/mismatch.h
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/mismatch.h
+D:\Tools\CUDA\\include\thrust/system/detail/adl/equal.h
+D:\Tools\CUDA\\include\thrust/system/detail/sequential/equal.h
+D:\Tools\CUDA\\include\thrust/system/cpp/detail/equal.h
+D:\Tools\CUDA\\include\thrust/system/cuda/detail/equal.h
+D:\Tools\CUDA\\include\thrust/detail/host_vector.inl
+D:\Tools\CUDA\\include\thrust/device_vector.h
+D:\Tools\CUDA\\include\thrust/device_malloc_allocator.h
+D:\Tools\CUDA\\include\thrust/device_ptr.h
+D:\Tools\CUDA\\include\thrust/memory.h
+D:\Tools\CUDA\\include\thrust/detail/device_ptr.inl
+D:\Tools\CUDA\\include\thrust/device_reference.h
+D:\Tools\CUDA\\include\thrust/detail/device_reference.inl
+D:\Tools\CUDA\\include\thrust/device_malloc.h
+D:\Tools\CUDA\\include\thrust/detail/device_malloc.inl
+D:\Tools\CUDA\\include\thrust/device_free.h
+D:\Tools\CUDA\\include\thrust/detail/device_free.inl
+D:\Tools\CUDA\\include\thrust/detail/device_vector.inl

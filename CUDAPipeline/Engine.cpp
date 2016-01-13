@@ -25,16 +25,17 @@
 #include <thrust/host_vector.h> 
 #include <thrust/device_vector.h>
 
-uchar4* rasterize(int w, int h, float3 *vertices, int *indices);
+void rasterize(uchar4 *pixels, int width, int height, float3 *vertices, int *indices);
 
 int imageW = 1000, imageH = 1000;
-uchar4 *h_Src = (uchar4 *)malloc(imageW * imageH * 4);
+uchar4 *pixels;
 GLuint gl_Tex, gl_Shader;
 
 void displayFunc(void);
 void initOpenGLBuffers(int w, int h);
 
 int main(int argc, char **argv) {
+	// GL
 	printf("Initializing GLUT...\n");
 	glutInit(&argc, argv);
 
@@ -43,6 +44,7 @@ int main(int argc, char **argv) {
 	glutInitWindowPosition(0, 0);
 	glutCreateWindow(argv[0]);
 
+	// Triangle Setup
 	float3 *vertices = new float3[3];
 	vertices[0] = make_float3(0.5, 0.5, 0.0);
 	vertices[1] = make_float3(1.0, 0.5, 0.0),
@@ -53,19 +55,11 @@ int main(int argc, char **argv) {
 	indices[1] = 1;
 	indices[2] = 2;
 
-	h_Src = rasterize(imageW, imageH, vertices, indices);
-	/*
-	for (int y = 0; y < imageH; y++)
-	{
-		for (int x = 0; x < imageW; x++)
-		{
-			h_Src[x + y * imageW].x = (int) ((1.0f * y / imageH) * 255);
-			h_Src[x + y * imageW].y = (int)((1.0f * x / imageW) * 255);
-			h_Src[x + y * imageW].z = 0;
-			h_Src[x + y * imageW].w = 255;
-		}
-	}
-	*/
+	// Rasterization
+	pixels = (uchar4 *)malloc(imageW * imageH * 4);
+	rasterize(pixels, imageW, imageH, vertices, indices);
+
+	// Render
 	initOpenGLBuffers(imageW, imageH);
 	displayFunc();
 	glutMainLoop();
@@ -117,7 +111,7 @@ void initOpenGLBuffers(int w, int h) {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, h_Src);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
 	printf("Texture created.\n");
 
 	/*

@@ -11,13 +11,24 @@ using namespace thrust;
 __global__ void rasterizeBlock(uchar4 *frags, int *w, int *h) {
 	for (int y = 0; y < *h; y++)
 		for (int x = 0; x < *w; x++)
-			frags[x + y * *w] = make_uchar4(255, 0, 0, 255);
+			frags[x + y * (*w)] = make_uchar4(255, 0, 0, 255);
 }
 
-uchar4* rasterize(int w, int h) {
+uchar4* rasterize(int w, int h, float3 *vertices, int *indices) {
 	uchar4* frags = (uchar4 *)malloc(sizeof(uchar4) * w * h);;
 
-	int bX = 50, bY = 100, bW = 50, bH = 100;
+	float3 v1 = *(vertices + indices[0]),
+		v2 = *(vertices + indices[1]),
+		v3 = *(vertices + indices[2]);
+
+	float x1 = fmin(v1.x, fmin(v2.x, v3.x)) * w,
+		x2 = fmax(v1.x, fmax(v2.x, v3.x)) * w,
+		y1 = fmin(v1.y, fmin(v2.y, v3.y)) * h,
+		y2 = fmax(v1.y, fmax(v2.y, v3.y)) * h;
+
+	printf("%f, %f, %f, %f", x1, x2, y1, y2);
+
+	int bX = x1, bY = y1, bW = x2 - x1, bH = y2 - y1;
 	int *d_bW, *d_bH;
 	uchar4* block = (uchar4 *)malloc(sizeof(uchar4) * bW * bH);
 	uchar4* d_block;

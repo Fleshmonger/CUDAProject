@@ -25,7 +25,7 @@
 #include <thrust/host_vector.h> 
 #include <thrust/device_vector.h>
 
-uchar4* rasterize(int w, int h);
+uchar4* rasterize(int w, int h, float3 *vertices, int *indices);
 
 int imageW = 1000, imageH = 1000;
 uchar4 *h_Src = (uchar4 *)malloc(imageW * imageH * 4);
@@ -42,7 +42,18 @@ int main(int argc, char **argv) {
 	glutInitWindowSize(imageW, imageH);
 	glutInitWindowPosition(0, 0);
 	glutCreateWindow(argv[0]);
-	h_Src = rasterize(imageW, imageH);
+
+	float3 *vertices = new float3[3];
+	vertices[0] = make_float3(0.5, 0.5, 0.0);
+	vertices[1] = make_float3(1.0, 0.5, 0.0),
+	vertices[2] = make_float3(1.0, 1.0, 0.0);
+
+	int *indices = new int[3];
+	indices[0] = 0;
+	indices[1] = 1;
+	indices[2] = 2;
+
+	h_Src = rasterize(imageW, imageH, vertices, indices);
 	/*
 	for (int y = 0; y < imageH; y++)
 	{

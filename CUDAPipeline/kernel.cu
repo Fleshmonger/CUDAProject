@@ -8,47 +8,45 @@
 using namespace std;
 using namespace thrust;
 
-__global__ void rasterizeBlock(uchar4 *frags, int *w, int *h) {
-	for (int y = 0; y < *h; y++)
-		for (int x = 0; x < *w; x++)
-			frags[x + y * (*w)] = make_uchar4(255, 0, 0, 255);
+__global__ void rasterizeTriangle(uchar4 *pixels, int *width, int *height, float3 *vertices, int3 *indices) {
+	int3 index = indices[blockIdx.x];
+	float3 v1 = vertices[index.x],
+		v2 = vertices[index.y],
+		v3 = vertices[index.z];
+	int left = fmin(v1.x, fmin(v2.x, v3.x)) * (*width),
+		right = fmax(v1.x, fmax(v2.x, v3.x)) * (*width),
+		bottom = fmin(v1.y, fmin(v2.y, v3.y)) * (*height),
+		top = fmax(v1.y, fmax(v2.y, v3.y)) * (*height);
+	for (int x = left; x < right; x++)
+		for (int y = bottom; y < top; y++)
+			pixels[x + y * (*width)] = make_uchar4(255, 0, 0, 255);
+
 }
 
-void rasterize(uchar4 *pixels, int width, int height, float3 *vertices, int3 *indices) {
-	int3 index = indices[0];
-	float3 v1 = *(vertices + index.x),
-		v2 = *(vertices + index.y),
-		v3 = *(vertices + index.z);
+void rasterize(uchar4 *pixels, int width, int height, float3 *vertices, int3 *indices, int vLength, int iLength) {
+	uchar4 *d_pixels;
+	int *d_width, *d_height;
+	float3 *d_vertices;
+	int3 *d_indices;
 
-	float x1 = fmin(v1.x, fmin(v2.x, v3.x)) * width,
-		x2 = fmax(v1.x, fmax(v2.x, v3.x)) * width,
-		y1 = fmin(v1.y, fmin(v2.y, v3.y)) * height,
-		y2 = fmax(v1.y, fmax(v2.y, v3.y)) * height;
+	cudaMalloc((void **)&d_pixels, sizeof(uchar4) * width * height);
+	cudaMalloc((void **)&d_width, sizeof(int));
+	cudaMalloc((void **)&d_height, sizeof(int));
+	cudaMalloc((void **)&d_vertices, sizeof(float3) * vLength);
+	cudaMalloc((void **)&d_indices, sizeof(int3) * iLength);
 
-	printf("%f, %f, %f, %f", x1, x2, y1, y2);
+	cudaMemcpy(d_width, &width, sizeof(int), cudaMemcpyHostToDevice);
+	cudaMemcpy(d_height, &height, sizeof(int), cudaMemcpyHostToDevice);
+	cudaMemcpy(d_vertices, vertices, sizeof(float3) * vLength, cudaMemcpyHostToDevice);
+	cudaMemcpy(d_indices, indices, sizeof(int3) * iLength, cudaMemcpyHostToDevice);
 
-	int bX = x1, bY = y1, bW = x2 - x1, bH = y2 - y1;
-	int *d_bW, *d_bH;
-	uchar4* block = (uchar4 *)malloc(sizeof(uchar4) * bW * bH);
-	uchar4* d_block;
+	rasterizeTriangle<<<1, 1 >>>(d_pixels, d_width, d_height, d_vertices, d_indices);
 
-	cudaMalloc((void **) &d_bW, sizeof(int));
-	cudaMalloc((void **) &d_bH, sizeof(int));
-	cudaMalloc((void **) &d_block, sizeof(uchar4) * bW * bH);
+	cudaMemcpy(pixels, d_pixels, sizeof(uchar4) * width * height, cudaMemcpyDeviceToHost);
 
-	cudaMemcpy(d_bW, &bW, sizeof(int), cudaMemcpyHostToDevice);
-	cudaMemcpy(d_bH, &bH, sizeof(int), cudaMemcpyHostToDevice);
-
-	rasterizeBlock<<<1,1>>>(d_block, d_bW, d_bH);
-	
-	cudaMemcpy(block, d_block, sizeof(uchar4) * bW * bH, cudaMemcpyDeviceToHost);
-
-	for (int y = 0; y < bH; y++)
-		for (int x = 0; x < bW; x++)
-			pixels[x + bX + width * (y + bY)] = block[x + y * bW];
-
-	free(block);
-	cudaFree(d_bW);
-	cudaFree(d_bH);
-	cudaFree(d_block);
+	cudaFree(d_pixels);
+	cudaFree(d_width);
+	cudaFree(d_height);
+	cudaFree(d_vertices);
+	cudaFree(d_indices);
 }

@@ -25,7 +25,7 @@
 #include <thrust/host_vector.h> 
 #include <thrust/device_vector.h>
 
-void rasterize(uchar4 *pixels, int width, int height, float3 *vertices, int3 *indices);
+void rasterize(uchar4 *pixels, int width, int height, float3 *vertices, int3 *indices, int vLength, int iLength);
 
 int imageW = 1000, imageH = 1000;
 uchar4 *pixels;
@@ -45,17 +45,19 @@ int main(int argc, char **argv) {
 	glutCreateWindow(argv[0]);
 
 	// Triangle Setup
-	float3 *vertices = new float3[3];
+	int vLength = 3, iLength = 1;
+
+	float3 *vertices = new float3[vLength];
 	vertices[0] = make_float3(0.5, 0.5, 0.0);
 	vertices[1] = make_float3(1.0, 0.5, 0.0),
 	vertices[2] = make_float3(1.0, 1.0, 0.0);
 
-	int3 *indices = new int3[1];
+	int3 *indices = new int3[iLength];
 	indices[0] = make_int3(0, 1, 2);
 
 	// Rasterization
 	pixels = (uchar4 *)malloc(imageW * imageH * 4);
-	rasterize(pixels, imageW, imageH, vertices, indices);
+	rasterize(pixels, imageW, imageH, vertices, indices, vLength, iLength);
 
 	// Render
 	initOpenGLBuffers(imageW, imageH);

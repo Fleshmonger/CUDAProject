@@ -1,4 +1,4 @@
-﻿Build started 14-01-2016 00:08:31.
+﻿Build started 14-01-2016 00:39:22.
      1>Project "D:\Projects\CUDAProject\CUDAPipeline\CUDASolution.vcxproj" on node 2 (Build target(s)).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(363,5): warning MSB8004: Intermediate Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Intermediate Directory.
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(364,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
@@ -6,7 +6,7 @@
          D:\Programs\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\cl.exe /E /nologo /showIncludes /TP /D__CUDACC__ /DWIN32 /DWIN32 /D_MBCS /D_MBCS /I. /I..\common\inc /I.\ /ID:\Tools\CUDA\\include /I..\common\inc /ID:\Tools\CUDA\bin /ID:\Tools\CUDA\include /I. /FIcuda_runtime.h /c D:\Projects\CUDAProject\CUDAPipeline\kernel.cu 
        CudaBuild:
          Compiling CUDA source file kernel.cu...
-         cmd.exe /C "C:\Users\Mindbug\AppData\Local\Temp\tmp96c539cad93f4cccb08d08cf99dbadd9.cmd"
+         cmd.exe /C "C:\Users\Mindbug\AppData\Local\Temp\tmpc13579bcffc749abb6f31683d68025bb.cmd"
          "D:\Tools\CUDA\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" -gencode=arch=compute_30,code=\"sm_30,compute_30\" -gencode=arch=compute_35,code=\"sm_35,compute_35\" -gencode=arch=compute_37,code=\"sm_37,compute_37\" -gencode=arch=compute_50,code=\"sm_50,compute_50\" -gencode=arch=compute_52,code=\"sm_52,compute_52\" --use-local-env --cl-version 2013 -ccbin "D:\Programs\Microsoft Visual Studio 12.0\VC\bin\x86_amd64"  -I. -I..\common\inc -I.\ -ID:\Tools\CUDA\\include -I..\common\inc -ID:\Tools\CUDA\include     --keep-dir x64\Release -maxrregcount=0  --machine 64 --compile -cudart static -Xcompiler "/wd 4819" --expt-extended-lambda     -DWIN32 -DWIN32 -D_MBCS -D_MBCS -Xcompiler "/EHsc /W3 /nologo /O2 /Zi  /MT " -o dump\Release\kernel.cu.obj "D:\Projects\CUDAProject\CUDAPipeline\kernel.cu"
          
          D:\Projects\CUDAProject\CUDAPipeline>"D:\Tools\CUDA\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" -gencode=arch=compute_30,code=\"sm_30,compute_30\" -gencode=arch=compute_35,code=\"sm_35,compute_35\" -gencode=arch=compute_37,code=\"sm_37,compute_37\" -gencode=arch=compute_50,code=\"sm_50,compute_50\" -gencode=arch=compute_52,code=\"sm_52,compute_52\" --use-local-env --cl-version 2013 -ccbin "D:\Programs\Microsoft Visual Studio 12.0\VC\bin\x86_amd64"  -I. -I..\common\inc -I.\ -ID:\Tools\CUDA\\include -I..\common\inc -ID:\Tools\CUDA\include     --keep-dir x64\Release -maxrregcount=0  --machine 64 --compile -cudart static -Xcompiler "/wd 4819" --expt-extended-lambda     -DWIN32 -DWIN32 -D_MBCS -D_MBCS -Xcompiler "/EHsc /W3 /nologo /O2 /Zi  /MT " -o dump\Release\kernel.cu.obj "D:\Projects\CUDAProject\CUDAPipeline\kernel.cu" 
@@ -15,7 +15,6 @@
      1>D:\Tools\CUDA\include\thrust/system/cuda/detail/bulk/execution_policy.hpp(303): warning C4267: 'argument' : conversion from 'size_t' to 'thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>::size_type', possible loss of data
      1>D:\Tools\CUDA\include\thrust/system/cuda/detail/bulk/execution_policy.hpp(319): warning C4267: 'argument' : conversion from 'size_t' to 'thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>::size_type', possible loss of data
      1>D:\Tools\CUDA\include\thrust/system/cuda/detail/bulk/execution_policy.hpp(439): warning C4267: 'argument' : conversion from 'size_t' to 'thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>::size_type', possible loss of data
-     1>D:/Projects/CUDAProject/CUDAPipeline/kernel.cu(32): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
      1>D:\Tools\CUDA\include\thrust/system/cuda/detail/bulk/execution_policy.hpp(250): warning C4267: 'argument' : conversion from 'size_t' to 'thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>,0x00>::size_type', possible loss of data
                  D:\Tools\CUDA\include\thrust/system/cuda/detail/bulk/execution_policy.hpp(625) : see reference to function template instantiation 'thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>,0x00> thrust::system::cuda::detail::bulk_::par<thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>>(ExecutionAgent,size_t)' being compiled
                  with
@@ -65,4 +64,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:29.62
+Time Elapsed 00:00:28.99

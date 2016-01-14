@@ -68,6 +68,7 @@ __global__ void rasterizeTriangle(int *width, int *height, float3 *vertices, int
 
 	// Init Pixels
 	bool *f_pixels = (bool*)malloc(sizeof(bool) * f_width * f_height);
+	bool f_empty = true;
 
 	// Rasterize
 	for (int x = 0; x < f_width; x++) {
@@ -76,17 +77,24 @@ __global__ void rasterizeTriangle(int *width, int *height, float3 *vertices, int
 				alpha = ((i_v2y - i_v3y) * (i_x - i_v3x) + (i_v3x - i_v2x) * (i_y - i_v3y)) / alpha_denom,
 				beta = ((i_v3y - i_v1y) * (i_x - i_v3x) + (i_v1x - i_v3x) * (i_y - i_v3y)) / beta_denom,
 				gamma = 1.0f - alpha - beta;
-			if (0.0 < alpha && 0.0 < beta && 0.0 < gamma)
+			if (0.0 < alpha && 0.0 < beta && 0.0 < gamma) {
 				f_pixels[x + y * f_width] = true;
+				f_empty = false;
+			}
 			else
 				f_pixels[x + y * f_width] = false;
 		}
 	}
-	fragments[threadIdx.x + blockIdx.x * THREADS_PER_BLOCK] = fragment(f_pixels, f_x, f_y, f_width, f_height, blockIdx.x);
+	if (f_empty)
+		free(f_pixels);
+	else
+		fragments[threadIdx.x + blockIdx.x * THREADS_PER_BLOCK] = fragment(f_pixels, f_x, f_y, f_width, f_height, blockIdx.x);
 }
 
 __global__ void fragmentShader(uchar4 *d_pixels, int *width, float3 *vertices, int3 *indices, fragment *fragments) {
 	fragment frag = fragments[threadIdx.x + blockIdx.x * THREADS_PER_BLOCK];
+	if (frag.pixels == nullptr)
+		return;
 	for (int x = 0; x < frag.i_width; x++) {
 		for (int y = 0; y < frag.i_height; y++) {
 			if (frag.pixels[x + y * frag.i_width])

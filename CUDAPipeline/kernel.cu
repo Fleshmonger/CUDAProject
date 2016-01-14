@@ -12,29 +12,40 @@ using namespace thrust;
 
 */
 
+// Rasterizes a single triangle.
 __global__ void rasterizeTriangle(uchar4 *pixels, int *width, int *height, float3 *vertices, int3 *indices) {
+	// Retrieve Vertices
 	int3 index = indices[blockIdx.x];
 	float3 v1 = vertices[index.x],
 		v2 = vertices[index.y],
 		v3 = vertices[index.z];
+
+	// Image Coordinates
 	float i_v1x = v1.x * (*width),
 		i_v1y = v1.y * (*height),
 		i_v2x = v2.x * (*width),
 		i_v2y = v2.y * (*height),
 		i_v3x = v3.x * (*width),
 		i_v3y = v3.y * (*height);
-	int left = fmin(v1.x, fmin(v2.x, v3.x)) * (*width),
+
+	// Triangle Bounding Box
+	float left = fmin(v1.x, fmin(v2.x, v3.x)) * (*width),
 		right = fmax(v1.x, fmax(v2.x, v3.x)) * (*width),
 		bottom = fmin(v1.y, fmin(v2.y, v3.y)) * (*height),
 		top = fmax(v1.y, fmax(v2.y, v3.y)) * (*height);
-	for (int x = left; x < right; x++) {
-		for (int y = bottom; y < top; y++) {
-			float alpha = ((i_v2y - i_v3y)*(x - i_v3x) + (i_v3x - i_v2x)*(y - i_v3y)) /
-				((i_v2y - i_v3y)*(i_v1x - i_v3x) + (i_v3x - i_v2x)*(i_v1y - i_v3y)),
-				beta = ((i_v3y - i_v1y)*(x - i_v3x) + (i_v1x - i_v3x)*(y - i_v3y)) /
-				((i_v2y - i_v3y)*(i_v1x - i_v3x) + (i_v3x - i_v2x)*(i_v1y - i_v3y)),
+
+	// Barycentric Init
+	float alpha_denom = (i_v2y - i_v3y) * (i_v1x - i_v3x) + (i_v3x - i_v2x) * (i_v1y - i_v3y),
+		beta_denom = (i_v2y - i_v3y) * (i_v1x - i_v3x) + (i_v3x - i_v2x) * (i_v1y - i_v3y);
+
+	// Rasterize
+	for (int x = round(left); x < right; x++) {
+		for (int y = round(bottom); y < top; y++) {
+			float i_x = x + 0.5, i_y = y + 0.5,
+				alpha = ((i_v2y - i_v3y) * (i_x - i_v3x) + (i_v3x - i_v2x) * (i_y - i_v3y)) / alpha_denom,
+				beta = ((i_v3y - i_v1y) * (i_x - i_v3x) + (i_v1x - i_v3x) * (i_y - i_v3y)) / beta_denom,
 				gamma = 1.0f - alpha - beta;
-			if (0 < alpha && 0 < beta && 0 < gamma)
+			if (0.0 < alpha && 0.0 < beta && 0.0 < gamma)
 				pixels[x + y * (*width)] = make_uchar4(255, 0, 0, 255);
 		}
 	}

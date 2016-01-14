@@ -1,4 +1,4 @@
-﻿Build started 14-01-2016 01:05:57.
+﻿Build started 14-01-2016 01:25:37.
      1>Project "D:\Projects\CUDAProject\CUDAPipeline\CUDASolution.vcxproj" on node 2 (Build target(s)).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(363,5): warning MSB8004: Intermediate Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Intermediate Directory.
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(364,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
@@ -6,7 +6,7 @@
          D:\Programs\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\cl.exe /E /nologo /showIncludes /TP /D__CUDACC__ /DWIN32 /DWIN32 /D_MBCS /D_MBCS /I. /I..\common\inc /I.\ /ID:\Tools\CUDA\\include /I..\common\inc /ID:\Tools\CUDA\bin /ID:\Tools\CUDA\include /I. /FIcuda_runtime.h /c D:\Projects\CUDAProject\CUDAPipeline\kernel.cu 
        CudaBuild:
          Compiling CUDA source file kernel.cu...
-         cmd.exe /C "C:\Users\Mindbug\AppData\Local\Temp\tmpf1ee6413ea764cec9616cfbcef25c466.cmd"
+         cmd.exe /C "C:\Users\Mindbug\AppData\Local\Temp\tmp6a2445d40d214a13ad66a22ff95523c5.cmd"
          "D:\Tools\CUDA\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" -gencode=arch=compute_30,code=\"sm_30,compute_30\" -gencode=arch=compute_35,code=\"sm_35,compute_35\" -gencode=arch=compute_37,code=\"sm_37,compute_37\" -gencode=arch=compute_50,code=\"sm_50,compute_50\" -gencode=arch=compute_52,code=\"sm_52,compute_52\" --use-local-env --cl-version 2013 -ccbin "D:\Programs\Microsoft Visual Studio 12.0\VC\bin\x86_amd64"  -I. -I..\common\inc -I.\ -ID:\Tools\CUDA\\include -I..\common\inc -ID:\Tools\CUDA\include     --keep-dir x64\Release -maxrregcount=0  --machine 64 --compile -cudart static -Xcompiler "/wd 4819" --expt-extended-lambda     -DWIN32 -DWIN32 -D_MBCS -D_MBCS -Xcompiler "/EHsc /W3 /nologo /O2 /Zi  /MT " -o dump\Release\kernel.cu.obj "D:\Projects\CUDAProject\CUDAPipeline\kernel.cu"
          
          D:\Projects\CUDAProject\CUDAPipeline>"D:\Tools\CUDA\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" -gencode=arch=compute_30,code=\"sm_30,compute_30\" -gencode=arch=compute_35,code=\"sm_35,compute_35\" -gencode=arch=compute_37,code=\"sm_37,compute_37\" -gencode=arch=compute_50,code=\"sm_50,compute_50\" -gencode=arch=compute_52,code=\"sm_52,compute_52\" --use-local-env --cl-version 2013 -ccbin "D:\Programs\Microsoft Visual Studio 12.0\VC\bin\x86_amd64"  -I. -I..\common\inc -I.\ -ID:\Tools\CUDA\\include -I..\common\inc -ID:\Tools\CUDA\include     --keep-dir x64\Release -maxrregcount=0  --machine 64 --compile -cudart static -Xcompiler "/wd 4819" --expt-extended-lambda     -DWIN32 -DWIN32 -D_MBCS -D_MBCS -Xcompiler "/EHsc /W3 /nologo /O2 /Zi  /MT " -o dump\Release\kernel.cu.obj "D:\Projects\CUDAProject\CUDAPipeline\kernel.cu" 
@@ -32,4 +32,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:26.91
+Time Elapsed 00:00:26.69

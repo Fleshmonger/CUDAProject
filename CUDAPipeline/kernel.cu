@@ -43,12 +43,12 @@ __global__ void rasterizeTriangle(int *width, int *height, float3 *vertices, int
 		v3 = vertices[index.z];
 
 	// Image Coordinates
-	float i_v1x = v1.x * (*width),
-		i_v1y = v1.y * (*height),
-		i_v2x = v2.x * (*width),
-		i_v2y = v2.y * (*height),
-		i_v3x = v3.x * (*width),
-		i_v3y = v3.y * (*height);
+	float i_v1x = (v1.x / 2.0 + 0.5) * (*width),
+		i_v1y = (v1.y / 2.0 + 0.5) * (*height),
+		i_v2x = (v2.x / 2.0 + 0.5) * (*width),
+		i_v2y = (v2.y / 2.0 + 0.5) * (*height),
+		i_v3x = (v3.x / 2.0 + 0.5) * (*width),
+		i_v3y = (v3.y / 2.0 + 0.5) * (*height);
 
 	// Triangle Bounding Box
 	float t_left = fmin(v1.x, fmin(v2.x, v3.x)) * (*width),
@@ -77,7 +77,7 @@ __global__ void rasterizeTriangle(int *width, int *height, float3 *vertices, int
 				alpha = ((i_v2y - i_v3y) * (i_x - i_v3x) + (i_v3x - i_v2x) * (i_y - i_v3y)) / alpha_denom,
 				beta = ((i_v3y - i_v1y) * (i_x - i_v3x) + (i_v1x - i_v3x) * (i_y - i_v3y)) / beta_denom,
 				gamma = 1.0f - alpha - beta;
-			if (0.0 < alpha && 0.0 < beta && 0.0 < gamma) {
+			if (0.0 <= alpha && 0.0 <= beta && 0.0 <= gamma) {
 				f_pixels[x + y * f_width] = true;
 				f_empty = false;
 			}

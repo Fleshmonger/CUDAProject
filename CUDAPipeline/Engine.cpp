@@ -45,22 +45,27 @@ int main(int argc, char **argv) {
 	glutCreateWindow(argv[0]);
 
 	// Triangle Setup
-	int numVertices = 5, numTriangles = 2;
+	int numVertices = 6, numTriangles = 2;
 
-	float3 *vertices = new float3[numVertices];
-	vertices[0] = make_float3(0.5, 0.5, 0.0);
-	vertices[1] = make_float3(1.0, 0.5, 0.0);
-	vertices[2] = make_float3(1.0, 1.0, 0.0);
-	vertices[3] = make_float3(0.5, 0.0, 0.0);
-	vertices[4] = make_float3(1.0, 0.0, 0.0);
+	float3 vertices[] = {
+		make_float3(0.0, 0.0, 0.0),
+		make_float3(1.0, 0.0, 0.0),
+		make_float3(1.0, 1.0, 0.0),
+		make_float3(-1.0, 1.0, 0.0),
+		make_float3(-1.0, -1.0, 0.0),
+		make_float3(1.0, -1.0, 0.0)
+	};
 
-	int3 *indices = new int3[numTriangles];
-	indices[0] = make_int3(0, 1, 2);
-	indices[1] = make_int3(2, 3, 4);
+	int3 indices[] = {
+		make_int3(0, 1, 2),
+		make_int3(3, 4, 5)
+	};
 
-	// Rasterization
+	printf("Vertices: %d. Indices: %d.\n", sizeof(vertices) / sizeof(float3), sizeof(indices) / sizeof(int3));
+
+	// Draw
 	pixels = (uchar4 *)malloc(imageW * imageH * 4);
-	draw(pixels, imageW, imageH, vertices, indices, numVertices, numTriangles);
+	draw(pixels, imageW, imageH, vertices, indices, sizeof(vertices) / sizeof(float3), sizeof(indices) / sizeof(int3));
 
 	// Render
 	initOpenGLBuffers(imageW, imageH);

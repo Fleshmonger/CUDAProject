@@ -25,7 +25,7 @@
 #include <thrust/host_vector.h> 
 #include <thrust/device_vector.h>
 
-void rasterize(uchar4 *pixels, int width, int height, float3 *vertices, int3 *indices, int vLength, int iLength);
+void rasterize(uchar4 *pixels, int width, int height, float3 *vertices, int3 *indices, int numVertices, int numTriangles);
 
 int imageW = 1000, imageH = 1000;
 uchar4 *pixels;
@@ -37,9 +37,6 @@ void initOpenGLBuffers(int w, int h);
 int main(int argc, char **argv) {
 	// GL
 	printf("Initializing GLUT...\n");
-	float test = 0.5;
-	test++;
-	printf("%f\n", test);
 	glutInit(&argc, argv);
 
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
@@ -48,19 +45,22 @@ int main(int argc, char **argv) {
 	glutCreateWindow(argv[0]);
 
 	// Triangle Setup
-	int vLength = 3, iLength = 1;
+	int numVertices = 5, numTriangles = 2;
 
-	float3 *vertices = new float3[vLength];
+	float3 *vertices = new float3[numVertices];
 	vertices[0] = make_float3(0.5, 0.5, 0.0);
-	vertices[1] = make_float3(1.0, 0.5, 0.0),
+	vertices[1] = make_float3(1.0, 0.5, 0.0);
 	vertices[2] = make_float3(1.0, 1.0, 0.0);
+	vertices[3] = make_float3(0.5, 0.0, 0.0);
+	vertices[4] = make_float3(1.0, 0.0, 0.0);
 
-	int3 *indices = new int3[iLength];
+	int3 *indices = new int3[numTriangles];
 	indices[0] = make_int3(0, 1, 2);
+	indices[1] = make_int3(2, 3, 4);
 
 	// Rasterization
 	pixels = (uchar4 *)malloc(imageW * imageH * 4);
-	rasterize(pixels, imageW, imageH, vertices, indices, vLength, iLength);
+	rasterize(pixels, imageW, imageH, vertices, indices, numVertices, numTriangles);
 
 	// Render
 	initOpenGLBuffers(imageW, imageH);

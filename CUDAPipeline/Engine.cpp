@@ -37,6 +37,9 @@ void initOpenGLBuffers(int w, int h);
 int main(int argc, char **argv) {
 	// GL
 	printf("Initializing GLUT...\n");
+	float test = 0.5;
+	test++;
+	printf("%f\n", test);
 	glutInit(&argc, argv);
 
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);

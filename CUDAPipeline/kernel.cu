@@ -8,19 +8,36 @@
 using namespace std;
 using namespace thrust;
 
+/*
+
+*/
+
 __global__ void rasterizeTriangle(uchar4 *pixels, int *width, int *height, float3 *vertices, int3 *indices) {
 	int3 index = indices[blockIdx.x];
 	float3 v1 = vertices[index.x],
 		v2 = vertices[index.y],
 		v3 = vertices[index.z];
+	float i_v1x = v1.x * (*width),
+		i_v1y = v1.y * (*height),
+		i_v2x = v2.x * (*width),
+		i_v2y = v2.y * (*height),
+		i_v3x = v3.x * (*width),
+		i_v3y = v3.y * (*height);
 	int left = fmin(v1.x, fmin(v2.x, v3.x)) * (*width),
 		right = fmax(v1.x, fmax(v2.x, v3.x)) * (*width),
 		bottom = fmin(v1.y, fmin(v2.y, v3.y)) * (*height),
 		top = fmax(v1.y, fmax(v2.y, v3.y)) * (*height);
-	for (int x = left; x < right; x++)
-		for (int y = bottom; y < top; y++)
-			pixels[x + y * (*width)] = make_uchar4(255, 0, 0, 255);
-
+	for (int x = left; x < right; x++) {
+		for (int y = bottom; y < top; y++) {
+			float alpha = ((i_v2y - i_v3y)*(x - i_v3x) + (i_v3x - i_v2x)*(y - i_v3y)) /
+				((i_v2y - i_v3y)*(i_v1x - i_v3x) + (i_v3x - i_v2x)*(i_v1y - i_v3y)),
+				beta = ((i_v3y - i_v1y)*(x - i_v3x) + (i_v1x - i_v3x)*(y - i_v3y)) /
+				((i_v2y - i_v3y)*(i_v1x - i_v3x) + (i_v3x - i_v2x)*(i_v1y - i_v3y)),
+				gamma = 1.0f - alpha - beta;
+			if (0 < alpha && 0 < beta && 0 < gamma)
+				pixels[x + y * (*width)] = make_uchar4(255, 0, 0, 255);
+		}
+	}
 }
 
 void rasterize(uchar4 *pixels, int width, int height, float3 *vertices, int3 *indices, int vLength, int iLength) {

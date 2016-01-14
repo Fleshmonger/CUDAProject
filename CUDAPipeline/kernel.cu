@@ -34,6 +34,12 @@ struct fragment {
 	}
 };
 
+// Runs the vertex shader on a vertex.
+__global__ void vertexShader(int *width, int *height, float3 *vertices) {
+
+}
+
+
 // Rasterizes a triangle.
 __global__ void rasterizeTriangle(int *width, int *height, float3 *vertices, int3 *indices, fragment *fragments) {
 	// Retrieve Vertices
@@ -91,6 +97,7 @@ __global__ void rasterizeTriangle(int *width, int *height, float3 *vertices, int
 		fragments[threadIdx.x + blockIdx.x * THREADS_PER_BLOCK] = fragment(f_pixels, f_x, f_y, f_width, f_height, blockIdx.x);
 }
 
+// Runs the fragment shader on a fragment.
 __global__ void fragmentShader(uchar4 *d_pixels, int *width, float3 *vertices, int3 *indices, fragment *fragments) {
 	fragment frag = fragments[threadIdx.x + blockIdx.x * THREADS_PER_BLOCK];
 	if (frag.pixels == nullptr)
@@ -104,17 +111,15 @@ __global__ void fragmentShader(uchar4 *d_pixels, int *width, float3 *vertices, i
 	free(frag.pixels);
 }
 
-void pipeline(uchar4 *d_pixels, int *d_width, int *d_height, float3 *d_vertices, int3 *d_indices, int numTriangles) {
+void pipeline(uchar4 *d_pixels, int *d_width, int *d_height, float3 *d_vertices, int3 *d_indices, int numVertices, int numTriangles, fragment *d_fragments) {
 	// Vertex Shader
+	vertexShader<<<numVertices / THREADS_PER_BLOCK, THREADS_PER_BLOCK>>>(d_width, d_height, d_vertices);
 
 	// Rasterize
-	fragment *d_fragments;
-	cudaMalloc((void **)&d_fragments, sizeof(fragment) * numTriangles * THREADS_PER_BLOCK);
 	rasterizeTriangle<<<numTriangles, THREADS_PER_BLOCK>>>(d_width, d_height, d_vertices, d_indices, d_fragments);
 
 	// Fragment Shader
 	fragmentShader<<<numTriangles, THREADS_PER_BLOCK>>>(d_pixels, d_width, d_vertices, d_indices, d_fragments);
-	cudaFree(d_fragments);
 
 	// Geometry Shader
 }
@@ -124,19 +129,21 @@ void draw(uchar4 *pixels, int width, int height, float3 *vertices, int3 *indices
 	int *d_width, *d_height;
 	float3 *d_vertices;
 	int3 *d_indices;
+	fragment *d_fragments;
 
 	cudaMalloc((void **)&d_pixels, sizeof(uchar4) * width * height);
 	cudaMalloc((void **)&d_width, sizeof(int));
 	cudaMalloc((void **)&d_height, sizeof(int));
 	cudaMalloc((void **)&d_vertices, sizeof(float3) * numVertices);
 	cudaMalloc((void **)&d_indices, sizeof(int3) * numTriangles);
+	cudaMalloc((void **)&d_fragments, sizeof(fragment) * numTriangles * THREADS_PER_BLOCK);
 
 	cudaMemcpy(d_width, &width, sizeof(int), cudaMemcpyHostToDevice);
 	cudaMemcpy(d_height, &height, sizeof(int), cudaMemcpyHostToDevice);
 	cudaMemcpy(d_vertices, vertices, sizeof(float3) * numVertices, cudaMemcpyHostToDevice);
 	cudaMemcpy(d_indices, indices, sizeof(int3) * numTriangles, cudaMemcpyHostToDevice);
 
-	pipeline(d_pixels, d_width, d_height, d_vertices, d_indices, numTriangles);
+	pipeline(d_pixels, d_width, d_height, d_vertices, d_indices, numVertices, numTriangles, d_fragments);
 
 	cudaMemcpy(pixels, d_pixels, sizeof(uchar4) * width * height, cudaMemcpyDeviceToHost);
 
@@ -145,4 +152,5 @@ void draw(uchar4 *pixels, int width, int height, float3 *vertices, int3 *indices
 	cudaFree(d_height);
 	cudaFree(d_vertices);
 	cudaFree(d_indices);
+	cudaFree(d_fragments);
 }

@@ -35,32 +35,32 @@ struct fragment {
 };
 
 // Runs the vertex shader on a vertex.
-__global__ void vertexShader(int *width, int *height, float3 *vertices) {
+__global__ void vertexShader(int *width, int *height, float3 vertices[], int *numVertices) {
+	// Retrieve Vertex.
+	int index = threadIdx.x + blockIdx.x * THREADS_PER_BLOCK;
+	if (index >= *numVertices)
+		return;
+	float3 vertex = vertices[index];
 
+	// Image Coordinates
+	vertices[index].x = (vertex.x / 2.0 + 0.5) * (*width);
+	vertices[index].y = (vertex.y / 2.0 + 0.5) * (*height);
 }
 
 
 // Rasterizes a triangle.
-__global__ void rasterizeTriangle(int *width, int *height, float3 *vertices, int3 *indices, fragment *fragments) {
+__global__ void rasterizeTriangle(int *width, int *height, float3 vertices[], int3 indices[], fragment fragments[]) {
 	// Retrieve Vertices
 	int3 index = indices[blockIdx.x];
 	float3 v1 = vertices[index.x],
 		v2 = vertices[index.y],
 		v3 = vertices[index.z];
 
-	// Image Coordinates
-	float i_v1x = (v1.x / 2.0 + 0.5) * (*width),
-		i_v1y = (v1.y / 2.0 + 0.5) * (*height),
-		i_v2x = (v2.x / 2.0 + 0.5) * (*width),
-		i_v2y = (v2.y / 2.0 + 0.5) * (*height),
-		i_v3x = (v3.x / 2.0 + 0.5) * (*width),
-		i_v3y = (v3.y / 2.0 + 0.5) * (*height);
-
 	// Triangle Bounding Box
-	float t_left = fmin(v1.x, fmin(v2.x, v3.x)) * (*width),
-		t_right = fmax(v1.x, fmax(v2.x, v3.x)) * (*width),
-		t_bottom = fmin(v1.y, fmin(v2.y, v3.y)) * (*height),
-		t_top = fmax(v1.y, fmax(v2.y, v3.y)) * (*height);
+	float t_left = fmin(v1.x, fmin(v2.x, v3.x)),
+		t_right = fmax(v1.x, fmax(v2.x, v3.x)),
+		t_bottom = fmin(v1.y, fmin(v2.y, v3.y)),
+		t_top = fmax(v1.y, fmax(v2.y, v3.y));
 
 	// Fragment Dimensions
 	int f_width = ceil((t_right - t_left) / SQRT_TPB),
@@ -69,8 +69,7 @@ __global__ void rasterizeTriangle(int *width, int *height, float3 *vertices, int
 		f_y = t_bottom + (threadIdx.x / SQRT_TPB) * f_height;
 
 	// Barycentric Init
-	float alpha_denom = (i_v2y - i_v3y) * (i_v1x - i_v3x) + (i_v3x - i_v2x) * (i_v1y - i_v3y),
-		beta_denom = (i_v2y - i_v3y) * (i_v1x - i_v3x) + (i_v3x - i_v2x) * (i_v1y - i_v3y);
+	float denom = (v2.y - v3.y) * (v1.x - v3.x) + (v3.x - v2.x) * (v1.y - v3.y);
 
 	// Init Pixels
 	bool *f_pixels = (bool*)malloc(sizeof(bool) * f_width * f_height);
@@ -80,8 +79,8 @@ __global__ void rasterizeTriangle(int *width, int *height, float3 *vertices, int
 	for (int x = 0; x < f_width; x++) {
 		for (int y = 0; y < f_height; y++) {
 			float i_x = f_x + x + 0.5, i_y = f_y + y + 0.5,
-				alpha = ((i_v2y - i_v3y) * (i_x - i_v3x) + (i_v3x - i_v2x) * (i_y - i_v3y)) / alpha_denom,
-				beta = ((i_v3y - i_v1y) * (i_x - i_v3x) + (i_v1x - i_v3x) * (i_y - i_v3y)) / beta_denom,
+				alpha = ((v2.y - v3.y) * (i_x - v3.x) + (v3.x - v2.x) * (i_y - v3.y)) / denom,
+				beta = ((v3.y - v1.y) * (i_x - v3.x) + (v1.x - v3.x) * (i_y - v3.y)) / denom,
 				gamma = 1.0f - alpha - beta;
 			if (0.0 <= alpha && 0.0 <= beta && 0.0 <= gamma) {
 				f_pixels[x + y * f_width] = true;
@@ -98,35 +97,49 @@ __global__ void rasterizeTriangle(int *width, int *height, float3 *vertices, int
 }
 
 // Runs the fragment shader on a fragment.
-__global__ void fragmentShader(uchar4 *d_pixels, int *width, float3 *vertices, int3 *indices, fragment *fragments) {
+__global__ void fragmentShader(uchar4 *d_pixels, int *width, float3 vertices[], int3 indices[], fragment fragments[]) {
+	// Retrieve Fragment
 	fragment frag = fragments[threadIdx.x + blockIdx.x * THREADS_PER_BLOCK];
 	if (frag.pixels == nullptr)
 		return;
+
+	// Copy Fragment Pixels
 	for (int x = 0; x < frag.i_width; x++) {
 		for (int y = 0; y < frag.i_height; y++) {
 			if (frag.pixels[x + y * frag.i_width])
 				d_pixels[frag.i_x + x + (frag.i_y + y) * (*width)] = make_uchar4(255, 0, 0, 255);
 		}
 	}
+
+	// Deallocate Fragment Pixels
 	free(frag.pixels);
 }
 
-void pipeline(uchar4 *d_pixels, int *d_width, int *d_height, float3 *d_vertices, int3 *d_indices, int numVertices, int numTriangles, fragment *d_fragments) {
+void pipeline(int numVertices, int numTriangles, uchar4 *d_pixels, int *d_width, int *d_height, float3 *d_vertices, int3 *d_indices, int *d_numVertices, fragment *d_fragments) {
 	// Vertex Shader
-	vertexShader<<<numVertices / THREADS_PER_BLOCK, THREADS_PER_BLOCK>>>(d_width, d_height, d_vertices);
+	printf("Vertex shader...\n");
+	vertexShader<<<ceil((float) numVertices / THREADS_PER_BLOCK), THREADS_PER_BLOCK>>>(d_width, d_height, d_vertices, d_numVertices);
+	cudaDeviceSynchronize();
+	printf("Vertex shader complete.\n");
 
 	// Rasterize
+	printf("Rasterization...\n");
 	rasterizeTriangle<<<numTriangles, THREADS_PER_BLOCK>>>(d_width, d_height, d_vertices, d_indices, d_fragments);
+	cudaDeviceSynchronize();
+	printf("Rasterization complete.\n");
 
 	// Fragment Shader
+	printf("Fragment shader...\n");
 	fragmentShader<<<numTriangles, THREADS_PER_BLOCK>>>(d_pixels, d_width, d_vertices, d_indices, d_fragments);
+	cudaDeviceSynchronize();
+	printf("Fragment shader complete.\n");
 
 	// Geometry Shader
 }
 
 void draw(uchar4 *pixels, int width, int height, float3 *vertices, int3 *indices, int numVertices, int numTriangles) {
 	uchar4 *d_pixels;
-	int *d_width, *d_height;
+	int *d_width, *d_height, *d_numVertices;
 	float3 *d_vertices;
 	int3 *d_indices;
 	fragment *d_fragments;
@@ -134,16 +147,18 @@ void draw(uchar4 *pixels, int width, int height, float3 *vertices, int3 *indices
 	cudaMalloc((void **)&d_pixels, sizeof(uchar4) * width * height);
 	cudaMalloc((void **)&d_width, sizeof(int));
 	cudaMalloc((void **)&d_height, sizeof(int));
+	cudaMalloc((void **)&d_numVertices, sizeof(int));
 	cudaMalloc((void **)&d_vertices, sizeof(float3) * numVertices);
 	cudaMalloc((void **)&d_indices, sizeof(int3) * numTriangles);
 	cudaMalloc((void **)&d_fragments, sizeof(fragment) * numTriangles * THREADS_PER_BLOCK);
 
 	cudaMemcpy(d_width, &width, sizeof(int), cudaMemcpyHostToDevice);
 	cudaMemcpy(d_height, &height, sizeof(int), cudaMemcpyHostToDevice);
+	cudaMemcpy(d_numVertices, &numVertices, sizeof(int), cudaMemcpyHostToDevice);
 	cudaMemcpy(d_vertices, vertices, sizeof(float3) * numVertices, cudaMemcpyHostToDevice);
 	cudaMemcpy(d_indices, indices, sizeof(int3) * numTriangles, cudaMemcpyHostToDevice);
 
-	pipeline(d_pixels, d_width, d_height, d_vertices, d_indices, numVertices, numTriangles, d_fragments);
+	pipeline(numVertices, numTriangles, d_pixels, d_width, d_height, d_vertices, d_indices, d_numVertices, d_fragments);
 
 	cudaMemcpy(pixels, d_pixels, sizeof(uchar4) * width * height, cudaMemcpyDeviceToHost);
 

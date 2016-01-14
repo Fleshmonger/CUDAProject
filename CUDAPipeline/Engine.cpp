@@ -25,7 +25,7 @@
 #include <thrust/host_vector.h> 
 #include <thrust/device_vector.h>
 
-void rasterize(uchar4 *pixels, int width, int height, float3 *vertices, int3 *indices, int numVertices, int numTriangles);
+void draw(uchar4 *pixels, int width, int height, float3 *vertices, int3 *indices, int numVertices, int numTriangles);
 
 int imageW = 1000, imageH = 1000;
 uchar4 *pixels;
@@ -60,7 +60,7 @@ int main(int argc, char **argv) {
 
 	// Rasterization
 	pixels = (uchar4 *)malloc(imageW * imageH * 4);
-	rasterize(pixels, imageW, imageH, vertices, indices, numVertices, numTriangles);
+	draw(pixels, imageW, imageH, vertices, indices, numVertices, numTriangles);
 
 	// Render
 	initOpenGLBuffers(imageW, imageH);

@@ -34,11 +34,11 @@ float3* divideTriangle(float3 vertices[], float radius, float3 v1, float3 v2, fl
 	}
 }
 
-float3* tetrahedron(float3 vertices[], float radius, float3 v1, float3 v2, float3 v3, float3 v4, int count) {
+void tetrahedron(float3 vertices[], float radius, float3 v1, float3 v2, float3 v3, float3 v4, int count) {
 	vertices = divideTriangle(vertices, radius, v1, v2, v3, count);
 	vertices = divideTriangle(vertices, radius, v4, v3, v2, count);
 	vertices = divideTriangle(vertices, radius, v1, v4, v2, count);
-	return divideTriangle(vertices, radius, v1, v3, v4, count);
+	vertices = divideTriangle(vertices, radius, v1, v3, v4, count);
 }
 
 float3* makeSphere(float3 center, float radius, int subdivisions) {
@@ -47,5 +47,6 @@ float3* makeSphere(float3 center, float radius, int subdivisions) {
 		v2 = make_float3(center.x, center.y + 0.942809 * radius, center.z + 0.333333 * radius),
 		v3 = make_float3(center.x - 0.816497 * radius, center.y - 0.471405 * radius, center.z + 0.333333 * radius),
 		v4 = make_float3(center.x + 0.816497 * radius, center.y - 0.471405 * radius, center.z + 0.333333 * radius);
-	return tetrahedron(vertices, radius, v1, v2, v3, v4, subdivisions);
+	tetrahedron(vertices, radius, v1, v2, v3, v4, subdivisions);
+	return vertices;
 }

@@ -8,7 +8,7 @@
 using namespace std;
 using namespace thrust;
 
-#define THREADS_PER_BLOCK 64
+#define THREADS_PER_BLOCK 128
 #define SQRT_TPB 8
 
 struct fragment {

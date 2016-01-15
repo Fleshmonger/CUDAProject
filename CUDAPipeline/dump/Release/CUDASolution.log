@@ -1,4 +1,4 @@
-﻿Build started 15-01-2016 13:05:47.
+﻿Build started 15-01-2016 14:34:54.
      1>Project "D:\Projects\CUDAProject\CUDAPipeline\CUDASolution.vcxproj" on node 2 (Build target(s)).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(363,5): warning MSB8004: Intermediate Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Intermediate Directory.
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(364,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
@@ -12,6 +12,7 @@
      1>D:\Tools\CUDA\include\thrust/system/cuda/detail/bulk/execution_policy.hpp(319): warning C4267: 'argument' : conversion from 'size_t' to 'thrust::system::cuda::detail::bulk_::parallel_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>::size_type', possible loss of data
      1>D:\Tools\CUDA\include\thrust/system/cuda/detail/bulk/execution_policy.hpp(439): warning C4267: 'argument' : conversion from 'size_t' to 'thrust::system::cuda::detail::bulk_::concurrent_group<thrust::system::cuda::detail::bulk_::agent<0x01>,0x00>::size_type', possible loss of data
      1>D:\Tools\CUDA\include\thrust/system/cuda/detail/bulk/detail/pointer_traits.hpp(55): warning C4800: 'unsigned int' : forcing value to bool 'true' or 'false' (performance warning)
+     1>engine.cpp(27): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
      1>D:\Programs\Microsoft Visual Studio 12.0\VC\include\xstring(1297): warning C4267: 'argument' : conversion from 'size_t' to 'int', possible loss of data
                  D:\Programs\Microsoft Visual Studio 12.0\VC\include\xstring(1294) : while compiling class template member function 'std::_String_iterator<std::_String_val<std::_Simple_types<char>>> std::basic_string<char,std::char_traits<char>,std::allocator<char>>::insert(std::_String_const_iterator<std::_String_val<std::_Simple_types<char>>>,_Elem)'
                  with
@@ -46,4 +47,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.59
+Time Elapsed 00:00:01.27

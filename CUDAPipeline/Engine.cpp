@@ -21,16 +21,39 @@ int main(int argc, char **argv) {
 
 	// Triangle Setup
 
-	/*
-	float3 *vertices = makeSphere(make_float3(0.0, 0.0, 0.0), 1.0, 1);
-	int numVertices = sizeof(vertices) / sizeof(float3);
+	// Sphere
+	int subdivisions = 4;
+	float3 *vertices = makeSphere(make_float3(0.0, 0.0, 0.0), 1.0, subdivisions);
+	int numVertices = 3 * pow(4, subdivisions + 1);
 
 	int3 *indices = new int3[numVertices / 3];
 	for (int i = 0; i < numVertices / 3; i++)
 		indices[i] = make_int3(3 * i, 3 * i + 1, 3 * i + 2);
-	int numIndices = sizeof(indices) / sizeof(int3);
+	int numIndices = numVertices / 3;
+
+	printf("numVertices = %d, numIndices = %d.\n", numVertices, numIndices);
+	for (int i = 0; i < numVertices; i++)
+		printf("Vertex %d = (%f, %f, %f).\n", i, vertices[i].x, vertices[i].y, vertices[i].z);
+
+	// Tetrahedron
+	/*
+	float3 vertices[] = {
+		make_float3(0.0, -1.0, 0.0),
+		make_float3(0.942809, 0.333333, 0.0),
+		make_float3(-0.471405, 0.333333, -0.816497),
+		make_float3(-0.471405, 0.333333, 0.816497)
+	};
+
+	int3 indices[] = {
+		make_int3(0, 1, 2),
+		make_int3(3, 2, 1),
+		make_int3(0, 3, 1),
+		make_int3(0, 2, 3)
+	};
 	*/
 
+	/*
+	// Two triangles
 	float3 vertices[] = {
 		make_float3(0.0, 0.0, 0.0),
 		make_float3(1.0, 0.0, 0.0),
@@ -45,8 +68,10 @@ int main(int argc, char **argv) {
 		make_int3(3, 4, 5)
 	};
 
+
 	int numVertices = sizeof(vertices) / sizeof(float3),
 		numIndices = sizeof(indices) / sizeof(int3);
+		*/
 	// Draw
 	pixels = (uchar4 *)malloc(imageW * imageH * 4);
 	draw(pixels, imageW, imageH, vertices, indices, numVertices, numIndices);

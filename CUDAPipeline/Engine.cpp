@@ -1,29 +1,4 @@
-// OpenGL Graphics includes
-#include <GL/glew.h>
-#include <GL/wglew.h>
-#include <GL/freeglut.h>
-
-// CUDA runtime,
-
-// CUDA utilities and system includes
-#include <cuda_runtime.h>
-#include <cuda_gl_interop.h>
-
-#include <helper_functions.h>
-#include <helper_cuda.h>
-#include <helper_cuda_gl.h>
-#include <rendercheck_gl.h>
-
-// Includes
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <cstdio>
-
-#include <thrust/transform.h> 
-#include <thrust/functional.h> 
-#include <thrust/host_vector.h> 
-#include <thrust/device_vector.h>
+#include "engine.h"
 
 void draw(uchar4 *pixels, int width, int height, float3 *vertices, int3 *indices, int numVertices, int numTriangles);
 
@@ -45,7 +20,16 @@ int main(int argc, char **argv) {
 	glutCreateWindow(argv[0]);
 
 	// Triangle Setup
-	int numVertices = 6, numTriangles = 2;
+
+	/*
+	float3 *vertices = makeSphere(make_float3(0.0, 0.0, 0.0), 1.0, 1);
+	int numVertices = sizeof(vertices) / sizeof(float3);
+
+	int3 *indices = new int3[numVertices / 3];
+	for (int i = 0; i < numVertices / 3; i++)
+		indices[i] = make_int3(3 * i, 3 * i + 1, 3 * i + 2);
+	int numIndices = sizeof(indices) / sizeof(int3);
+	*/
 
 	float3 vertices[] = {
 		make_float3(0.0, 0.0, 0.0),
@@ -61,11 +45,11 @@ int main(int argc, char **argv) {
 		make_int3(3, 4, 5)
 	};
 
-	printf("Vertices: %d. Indices: %d.\n", sizeof(vertices) / sizeof(float3), sizeof(indices) / sizeof(int3));
-
+	int numVertices = sizeof(vertices) / sizeof(float3),
+		numIndices = sizeof(indices) / sizeof(int3);
 	// Draw
 	pixels = (uchar4 *)malloc(imageW * imageH * 4);
-	draw(pixels, imageW, imageH, vertices, indices, sizeof(vertices) / sizeof(float3), sizeof(indices) / sizeof(int3));
+	draw(pixels, imageW, imageH, vertices, indices, numVertices, numIndices);
 
 	// Render
 	initOpenGLBuffers(imageW, imageH);
@@ -74,7 +58,7 @@ int main(int argc, char **argv) {
 }
 
 // OpenGL display function
-void displayFunc(void) {
+void displayFunc() {
 	// render the Mandelbrot image
 	//renderImage(true, g_isJuliaSet, precisionMode);
 

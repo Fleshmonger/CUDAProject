@@ -15,9 +15,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="engine.cpp" />
+    <ClCompile Include="meshes.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CudaCompile Include="kernel.cu" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="engine.h" />
+    <ClInclude Include="meshes.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{997E0757-EA74-4A4E-A0FC-47D8C8831A15}</ProjectGuid>

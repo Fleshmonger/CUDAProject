@@ -43,8 +43,7 @@ __global__ void vertexShader(int *width, int *height, float3 vertices[], int *nu
 	float3 vertex = vertices[index];
 
 	// Image Coordinates
-	vertices[index].x = (vertex.x / 2.0 + 0.5) * (*width);
-	vertices[index].y = (vertex.y / 2.0 + 0.5) * (*height);
+	vertices[index] = make_float3((vertex.x / 2.0 + 0.5) * (*width), (vertex.y / 2.0 + 0.5) * (*height), vertex.z);
 }
 
 

@@ -41,11 +41,32 @@ __global__ void vertexShader(int *width, int *height, float3 vertices[], int *nu
 	if (index >= *numVertices)
 		return;
 	float3 vertex = vertices[index];
-
-	// Image Coordinates
-	vertices[index] = make_float3((vertex.x / 2.0 + 0.5) * (*width), (vertex.y / 2.0 + 0.5) * (*height), vertex.z);
 }
 
+__device__ float d_min(float a, float b) {
+	if (a < b)
+		return a;
+	else
+		return b;
+}
+
+__device__ float d_min(float a, float b, float c) {
+	return d_min(a, d_min(b, c));
+}
+__device__ float d_max(float a, float b) {
+	if (a > b)
+		return a;
+	else
+		return b;
+}
+
+__device__ float d_max(float a, float b, float c) {
+	return d_max(a, d_max(b, c));
+}
+
+__device__ float d_ceil(float a) {
+	return a - (int)a > 0.0 ? (int)a + 1.0 : a;
+}
 
 // Rasterizes a triangle.
 __global__ void rasterizeTriangle(int *width, int *height, float3 vertices[], int3 indices[], fragment fragments[]) {
@@ -55,20 +76,25 @@ __global__ void rasterizeTriangle(int *width, int *height, float3 vertices[], in
 		v2 = vertices[index.y],
 		v3 = vertices[index.z];
 
+	// Map Image Coords.
+	float2 i_v1 = make_float2((v1.x / 2.0 + 0.5) * (*width), (v1.y / 2.0 + 0.5) * (*height)),
+		i_v2 = make_float2((v2.x / 2.0 + 0.5) * (*width), (v2.y / 2.0 + 0.5) * (*height)),
+		i_v3 = make_float2((v3.x / 2.0 + 0.5) * (*width), (v3.y / 2.0 + 0.5) * (*height));
+
 	// Triangle Bounding Box
-	float t_left = fmin(v1.x, fmin(v2.x, v3.x)),
-		t_right = fmax(v1.x, fmax(v2.x, v3.x)),
-		t_bottom = fmin(v1.y, fmin(v2.y, v3.y)),
-		t_top = fmax(v1.y, fmax(v2.y, v3.y));
+	int t_left = d_max(0.0, d_min(i_v1.x, i_v2.x, i_v3.x)),
+		t_bottom = d_max(0.0, d_min(i_v1.y, i_v2.y, i_v3.y)),
+		t_right = d_min(*width - 1, d_ceil(d_max(i_v1.x, i_v2.x, i_v3.x))),
+		t_top = d_min(*height - 1, d_ceil(d_max(i_v1.y, i_v2.y, i_v3.y)));
 
 	// Fragment Dimensions
-	int f_width = ceil((t_right - t_left) / SQRT_TPB),
-		f_height = ceil((t_top - t_bottom) / SQRT_TPB),
+	int f_width = d_ceil(((float) (t_right - t_left)) / SQRT_TPB),
+		f_height = d_ceil(((float) (t_top - t_bottom)) / SQRT_TPB),
 		f_x = t_left + (threadIdx.x % SQRT_TPB) * f_width,
 		f_y = t_bottom + (threadIdx.x / SQRT_TPB) * f_height;
 
 	// Barycentric Init
-	float denom = (v2.y - v3.y) * (v1.x - v3.x) + (v3.x - v2.x) * (v1.y - v3.y);
+	float denom = (i_v2.y - i_v3.y) * (i_v1.x - i_v3.x) + (i_v3.x - i_v2.x) * (i_v1.y - i_v3.y);
 
 	// Init Pixels
 	bool *f_pixels = new bool[f_width * f_height];
@@ -78,8 +104,8 @@ __global__ void rasterizeTriangle(int *width, int *height, float3 vertices[], in
 	for (int x = 0; x < f_width; x++) {
 		for (int y = 0; y < f_height; y++) {
 			float i_x = f_x + x + 0.5, i_y = f_y + y + 0.5,
-				alpha = ((v2.y - v3.y) * (i_x - v3.x) + (v3.x - v2.x) * (i_y - v3.y)) / denom,
-				beta = ((v3.y - v1.y) * (i_x - v3.x) + (v1.x - v3.x) * (i_y - v3.y)) / denom,
+				alpha = ((i_v2.y - i_v3.y) * (i_x - i_v3.x) + (i_v3.x - i_v2.x) * (i_y - i_v3.y)) / denom,
+				beta = ((i_v3.y - i_v1.y) * (i_x - i_v3.x) + (i_v1.x - i_v3.x) * (i_y - i_v3.y)) / denom,
 				gamma = 1.0f - alpha - beta;
 			if (0.0 <= alpha && 0.0 <= beta && 0.0 <= gamma) {
 				f_pixels[x + y * f_width] = true;

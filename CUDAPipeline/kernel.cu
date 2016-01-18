@@ -8,7 +8,7 @@
 using namespace std;
 using namespace thrust;
 
-#define THREADS_PER_BLOCK 128
+#define THREADS_PER_BLOCK 64
 #define SQRT_TPB 8
 
 struct fragment {
@@ -71,7 +71,7 @@ __global__ void rasterizeTriangle(int *width, int *height, float3 vertices[], in
 	float denom = (v2.y - v3.y) * (v1.x - v3.x) + (v3.x - v2.x) * (v1.y - v3.y);
 
 	// Init Pixels
-	bool *f_pixels = (bool*)malloc(sizeof(bool) * f_width * f_height);
+	bool *f_pixels = new bool[f_width * f_height];
 	bool f_empty = true;
 
 	// Rasterize
@@ -84,13 +84,12 @@ __global__ void rasterizeTriangle(int *width, int *height, float3 vertices[], in
 			if (0.0 <= alpha && 0.0 <= beta && 0.0 <= gamma) {
 				f_pixels[x + y * f_width] = true;
 				f_empty = false;
-			}
-			else
+			} else
 				f_pixels[x + y * f_width] = false;
 		}
 	}
 	if (f_empty)
-		free(f_pixels);
+		delete[] f_pixels;
 	else
 		fragments[threadIdx.x + blockIdx.x * THREADS_PER_BLOCK] = fragment(f_pixels, f_x, f_y, f_width, f_height, blockIdx.x);
 }
@@ -117,20 +116,23 @@ __global__ void fragmentShader(uchar4 *d_pixels, int *width, float3 vertices[], 
 void pipeline(int numVertices, int numTriangles, uchar4 *d_pixels, int *d_width, int *d_height, float3 *d_vertices, int3 *d_indices, int *d_numVertices, fragment *d_fragments) {
 	// Vertex Shader
 	printf("Vertex shader...\n");
-	vertexShader<<<ceil((float) numVertices / THREADS_PER_BLOCK), THREADS_PER_BLOCK>>>(d_width, d_height, d_vertices, d_numVertices);
+	vertexShader<<<ceil(((float) numVertices) / THREADS_PER_BLOCK), THREADS_PER_BLOCK>>>(d_width, d_height, d_vertices, d_numVertices);
 	cudaDeviceSynchronize();
+	printf("%s\n", cudaGetErrorString(cudaGetLastError()));
 	printf("Vertex shader complete.\n");
 
 	// Rasterize
 	printf("Rasterization...\n");
 	rasterizeTriangle<<<numTriangles, THREADS_PER_BLOCK>>>(d_width, d_height, d_vertices, d_indices, d_fragments);
 	cudaDeviceSynchronize();
+	printf("%s\n", cudaGetErrorString(cudaGetLastError()));
 	printf("Rasterization complete.\n");
 
 	// Fragment Shader
 	printf("Fragment shader...\n");
 	fragmentShader<<<numTriangles, THREADS_PER_BLOCK>>>(d_pixels, d_width, d_vertices, d_indices, d_fragments);
 	cudaDeviceSynchronize();
+	printf("%s\n", cudaGetErrorString(cudaGetLastError()));
 	printf("Fragment shader complete.\n");
 
 	// Geometry Shader

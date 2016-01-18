@@ -31,9 +31,11 @@ int main(int argc, char **argv) {
 		indices[i] = make_int3(3 * i, 3 * i + 1, 3 * i + 2);
 	int numIndices = numVertices / 3;
 
+	/*
 	printf("numVertices = %d, numIndices = %d.\n", numVertices, numIndices);
 	for (int i = 0; i < numVertices; i++)
 		printf("Vertex %d = (%f, %f, %f).\n", i, vertices[i].x, vertices[i].y, vertices[i].z);
+	*/
 
 	// Tetrahedron
 	/*

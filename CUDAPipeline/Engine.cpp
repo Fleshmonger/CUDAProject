@@ -22,7 +22,7 @@ int main(int argc, char **argv) {
 	// Triangle Setup
 
 	// Sphere
-	int subdivisions = 4;
+	int subdivisions = 0;
 	float3 *vertices = makeSphere(make_float3(0.0, 0.0, 0.0), 1.0, subdivisions);
 	int numVertices = 3 * pow(4, subdivisions + 1);
 

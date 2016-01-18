@@ -8,8 +8,8 @@
 using namespace std;
 using namespace thrust;
 
-#define THREADS_PER_BLOCK 64
-#define SQRT_TPB 8
+#define THREADS_PER_BLOCK 256
+#define SQRT_TPB 16
 
 struct fragment {
 	bool *pixels;
@@ -96,7 +96,7 @@ __global__ void rasterizeTriangle(int *width, int *height, float3 vertices[], in
 	// Barycentric Init
 	float denom = (i_v2.y - i_v3.y) * (i_v1.x - i_v3.x) + (i_v3.x - i_v2.x) * (i_v1.y - i_v3.y);
 
-	// Init Pixels
+	// Init Barycentric Coords
 	bool *f_pixels = new bool[f_width * f_height];
 	bool f_empty = true;
 
@@ -110,33 +110,35 @@ __global__ void rasterizeTriangle(int *width, int *height, float3 vertices[], in
 			if (0.0 <= alpha && 0.0 <= beta && 0.0 <= gamma) {
 				f_pixels[x + y * f_width] = true;
 				f_empty = false;
-			} else
+			} else {
 				f_pixels[x + y * f_width] = false;
+			}
 		}
 	}
-	if (f_empty)
+	if (f_empty) {
 		delete[] f_pixels;
+	}
 	else
 		fragments[threadIdx.x + blockIdx.x * THREADS_PER_BLOCK] = fragment(f_pixels, f_x, f_y, f_width, f_height, blockIdx.x);
 }
 
 // Runs the fragment shader on a fragment.
-__global__ void fragmentShader(uchar4 *d_pixels, int *width, float3 vertices[], int3 indices[], fragment fragments[]) {
+__global__ void fragmentShader(uchar4 *d_pixels, int *width, int *height, float3 vertices[], int3 indices[], fragment fragments[]) {
 	// Retrieve Fragment
 	fragment frag = fragments[threadIdx.x + blockIdx.x * THREADS_PER_BLOCK];
 	if (frag.pixels == nullptr)
 		return;
 
 	// Copy Fragment Pixels
-	for (int x = 0; x < frag.i_width; x++) {
-		for (int y = 0; y < frag.i_height; y++) {
+	for (int x = 0; x < frag.i_width && x + frag.i_x < *width; x++) {
+		for (int y = 0; y < frag.i_height && y + frag.i_y < *height; y++) {
 			if (frag.pixels[x + y * frag.i_width])
 				d_pixels[frag.i_x + x + (frag.i_y + y) * (*width)] = make_uchar4(255, 0, 0, 255);
 		}
 	}
 
 	// Deallocate Fragment Pixels
-	free(frag.pixels);
+	delete[] frag.pixels;
 }
 
 void pipeline(int numVertices, int numTriangles, uchar4 *d_pixels, int *d_width, int *d_height, float3 *d_vertices, int3 *d_indices, int *d_numVertices, fragment *d_fragments) {
@@ -156,7 +158,7 @@ void pipeline(int numVertices, int numTriangles, uchar4 *d_pixels, int *d_width,
 
 	// Fragment Shader
 	printf("Fragment shader...\n");
-	fragmentShader<<<numTriangles, THREADS_PER_BLOCK>>>(d_pixels, d_width, d_vertices, d_indices, d_fragments);
+	fragmentShader<<<numTriangles, THREADS_PER_BLOCK>>>(d_pixels, d_width, d_height, d_vertices, d_indices, d_fragments);
 	cudaDeviceSynchronize();
 	printf("%s\n", cudaGetErrorString(cudaGetLastError()));
 	printf("Fragment shader complete.\n");

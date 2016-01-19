@@ -28,10 +28,13 @@
 #include "meshes.h"
 
 // CUDA
-void bindImage(uchar4 image[], int windowWidth, int windowHeight);
-void bindVertices(float3 vertices[], int length);
-void bindIndices(int3 indices[], int length);
-void draw();
+namespace flex {
+	void init(bool cull);
+	void bindImage(uchar4 image[], int windowWidth, int windowHeight);
+	void bindVertices(float3 vertices[], int length);
+	void bindIndices(int3 indices[], int length);
+	void render();
+}
 
 int main(int argc, char **argv);
 void displayFunc();

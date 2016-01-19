@@ -19,7 +19,7 @@ int main(int argc, char **argv) {
 
 	// Triangle Setup
 	printf("Triangle Setup... ");
-	int subdivisions = 5;
+	int subdivisions = 6;
 	float3 *vertices = makeSphere(make_float3(0.0, 0.0, 0.0), 1.0, subdivisions);
 	int numVertices = 3 * pow(4, subdivisions + 1);
 
@@ -31,10 +31,10 @@ int main(int argc, char **argv) {
 
 	// Draw
 	image = new uchar4[imageWidth * imageHeight];
-	bindImage(image, imageWidth, imageHeight);
-	bindVertices(vertices, numVertices);
-	bindIndices(indices, numIndices);
-	draw();
+	flex::init(true);
+	flex::bindImage(image, imageWidth, imageHeight);
+	flex::bindVertices(vertices, numVertices);
+	flex::bindIndices(indices, numIndices);
 
 	// Render Loop
 	lastTime = glutGet(GLUT_ELAPSED_TIME);
@@ -43,6 +43,9 @@ int main(int argc, char **argv) {
 }
 
 void displayFunc() {
+	flex::render();
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, imageWidth, imageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+
 	glBegin(GL_QUADS);
 	glTexCoord2f(0.0f, 0.0f);
 	glVertex2f(-1.0f, -1.0f);

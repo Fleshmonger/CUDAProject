@@ -28,8 +28,8 @@ float3* divideTriangle(float3 vertices[], float radius, float3 v1, float3 v2, fl
 		return divideTriangle(vertices, radius, v1_2, v2_3, v1_3, count - 1);
 	} else {
 		vertices[0] = v1;
-		vertices[1] = v2;
-		vertices[2] = v3;
+		vertices[1] = v3;
+		vertices[2] = v2;
 		return vertices + 3;
 	}
 }

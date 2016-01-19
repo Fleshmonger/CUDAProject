@@ -37,7 +37,7 @@ __global__ void vertexShader(int *width, int *height, float3 vertices[], int *nu
 	int index = threadIdx.x + blockIdx.x * THREADS_PER_BLOCK;
 	if (index >= *numVertices)
 		return;
-	float3 vertex = vertices[index];
+	//float3 vertex = vertices[index];
 }
 
 __device__ float d_min(float a, float b) {
@@ -65,6 +65,18 @@ __device__ float d_ceil(float a) {
 	return a - (int)a > 0.0 ? (int)a + 1.0 : a;
 }
 
+__device__ float3 d_cross(float3 u, float3 v) {
+	return make_float3(u.y * v.z - u.z * v.y, u.z * v.x - u.x * v.z, u.x * v.y - u.y * v.x);
+}
+
+__device__ float3 d_subtract(float3 u, float3 v) {
+	return make_float3(u.x - v.x, u.y - v.y, u.z - v.z);
+}
+
+__device__ float d_dot(float3 u, float3 v) {
+	return u.x * v.x + u.y * v.y + u.z * v.z;
+}
+
 // Rasterizes a triangle.
 __global__ void rasterizeTriangle(int *width, int *height, float3 vertices[], int3 indices[], fragment fragments[], float3 interpolation[], int triangles[]) {
 	// Retrieve Vertices
@@ -73,7 +85,11 @@ __global__ void rasterizeTriangle(int *width, int *height, float3 vertices[], in
 		v2 = vertices[index.y],
 		v3 = vertices[index.z];
 
-	// Map Image Coords.
+	// Face Culling
+	if (d_cross(d_subtract(v2, v1), d_subtract(v3, v1)).z < 0.0)
+		return;
+
+	// Map Image Coords
 	float2 i_v1 = make_float2((v1.x / 2.0 + 0.5) * (*width), (v1.y / 2.0 + 0.5) * (*height)),
 		i_v2 = make_float2((v2.x / 2.0 + 0.5) * (*width), (v2.y / 2.0 + 0.5) * (*height)),
 		i_v3 = make_float2((v3.x / 2.0 + 0.5) * (*width), (v3.y / 2.0 + 0.5) * (*height));
@@ -118,8 +134,16 @@ __global__ void fragmentShader(uchar4 *d_pixels, int *width, int *height, float3
 	for (int x = frag.i_x; x < d_min(frag.i_x + frag.i_width, *width); x++) {
 		for (int y = frag.i_y; y < d_min(frag.i_y + frag.i_height, *height); y++) {
 			int index = x + y * (*width);
-			if (triangles[index] == frag.index)
-				d_pixels[index] = make_uchar4(interpolation[index].x * 255, interpolation[index].y * 255, interpolation[index].z * 255, 255);
+			if (triangles[index] == frag.index) {
+				int3 vIndex = indices[triangles[index]];
+				float3 v1 = vertices[vIndex.x],
+					v2 = vertices[vIndex.y],
+					v3 = vertices[vIndex.z];
+				float red = ((v1.x + 1.0) / 2) * interpolation[index].x + ((v2.x + 1.0) / 2) * interpolation[index].y + ((v3.x + 1.0) / 2) * interpolation[index].z,
+					green = ((v1.y + 1.0) / 2) * interpolation[index].x + ((v2.y + 1.0) / 2) * interpolation[index].y + ((v3.y + 1.0) / 2) * interpolation[index].z,
+					blue = ((v1.z + 1.0) / 2) * interpolation[index].x + ((v2.z + 1.0) / 2) * interpolation[index].y + ((v3.z + 1.0) / 2) * interpolation[index].z;
+				d_pixels[index] = make_uchar4(red * 255, green * 255, blue * 255, 255);
+			}
 		}
 	}
 }

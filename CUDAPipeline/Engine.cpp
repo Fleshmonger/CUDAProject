@@ -1,23 +1,17 @@
 #include "engine.h"
 
-
 int lastTime, frameCount = 0;
 
-int imageW = 1000, imageH = 1000;
-uchar4 *pixels;
+int imageWidth = 1000, imageHeight = 1000;
+uchar4 *image;
 GLuint gl_Tex, gl_Shader;
-
-void draw(uchar4 *pixels, int width, int height, float3 *vertices, int3 *indices, int numVertices, int numTriangles);
-
-void displayFunc();
-void initOpenGLBuffers();
 
 int main(int argc, char **argv) {
 	// GL
 	printf("GLUT Initialization... ");
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
-	glutInitWindowSize(imageW, imageH);
+	glutInitWindowSize(imageWidth, imageHeight);
 	glutInitWindowPosition(0, 0);
 	glutCreateWindow(argv[0]);
 	glutDisplayFunc(displayFunc);
@@ -36,8 +30,11 @@ int main(int argc, char **argv) {
 	printf("Done!\n");
 
 	// Draw
-	pixels = (uchar4 *)malloc(imageW * imageH * 4);
-	draw(pixels, imageW, imageH, vertices, indices, numVertices, numIndices);
+	image = new uchar4[imageWidth * imageHeight];
+	bindImage(image, imageWidth, imageHeight);
+	bindVertices(vertices, numVertices);
+	bindIndices(indices, numIndices);
+	draw();
 
 	// Render Loop
 	lastTime = glutGet(GLUT_ELAPSED_TIME);
@@ -83,6 +80,6 @@ void initOpenGLBuffers() {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, imageW, imageH, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, imageWidth, imageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
 	printf("Done!\n");
 }

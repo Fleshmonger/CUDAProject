@@ -27,6 +27,12 @@
 
 #include "meshes.h"
 
+// CUDA
+void bindImage(uchar4 image[], int windowWidth, int windowHeight);
+void bindVertices(float3 vertices[], int length);
+void bindIndices(int3 indices[], int length);
+void draw();
+
 int main(int argc, char **argv);
 void displayFunc();
-void initOpenGLBuffers(int w, int h);
+void initOpenGLBuffers();

@@ -33,20 +33,11 @@ namespace flex {
 	};
 
 	bool *d_cull;
-	int width, height, numVertices, numTriangles, *triangles, *d_width, *d_height, *d_numVertices, *d_triangles;
+	int width = 0, height = 0, numVertices = 0, numTriangles = 0, *triangles, *d_width, *d_height, *d_numVertices, *d_triangles;
 	int3 *d_indices;
-	float3 *interpolation, *d_vertices, *d_interpolation;
-	uchar4 *pixels, *d_pixels;
+	float3 *interpolation, *d_vertices, *d_verticesTransformed, *d_projMat, *d_modelMat, *d_interpolation;
+	uchar4 *background, *pixels, *d_pixels;
 	fragment *fragments, *d_fragments;
-
-	// Runs the vertex shader on a vertex.
-	__global__ void vertexShader(int *width, int *height, float3 vertices[], int *numVertices) {
-		// Retrieve Vertex.
-		int index = threadIdx.x + blockIdx.x * THREADS_PER_BLOCK;
-		if (index >= *numVertices)
-			return;
-		//float3 vertex = vertices[index];
-	}
 
 	__device__ float d_min(float a, float b) {
 		if (a < b)
@@ -82,11 +73,22 @@ namespace flex {
 		return make_float3(u.x - v.x, u.y - v.y, u.z - v.z);
 	}
 
-	/*
-	__device__ float d_dot(float3 u, float3 v) {
-	return u.x * v.x + u.y * v.y + u.z * v.z;
+	__device__ float3 mult(float3 mat[], float3 v) {
+		return make_float3(
+			mat[0].x * v.x + mat[1].x * v.y + mat[2].x * v.z,
+			mat[0].y * v.x + mat[1].y * v.y + mat[2].y * v.z,
+			mat[0].z * v.x + mat[1].z * v.y + mat[2].z * v.z
+			);
 	}
-	*/
+
+	// Runs the vertex shader on a vertex.
+	__global__ void vertexShader(int *width, int *height, float3 vertices[], float3 verticesTransformed[], int *numVertices, float3 projMat[], float3 modelMat[]) {
+		// Retrieve Vertex.
+		int index = threadIdx.x + blockIdx.x * THREADS_PER_BLOCK;
+		if (index >= *numVertices)
+			return;
+		verticesTransformed[index] = mult(projMat, mult(modelMat, vertices[index]));
+	}
 
 	// Rasterizes a triangle.
 	__global__ void rasterizeTriangle(int *width, int *height, float3 vertices[], int3 indices[], fragment fragments[], float3 interpolation[], int triangles[], bool *cull) {
@@ -146,6 +148,7 @@ namespace flex {
 			for (int y = frag.i_y; y < d_min(frag.i_y + frag.i_height, *height); y++) {
 				int index = x + y * (*width);
 				if (triangles[index] == frag.index) {
+
 					int3 vIndex = indices[triangles[index]];
 					float3 v1 = vertices[vIndex.x],
 						v2 = vertices[vIndex.y],
@@ -167,22 +170,22 @@ namespace flex {
 	void pipeline() {
 		// Vertex Shader
 		printf("Vertex shader...\n");
-		vertexShader << <ceil(((float)numVertices) / THREADS_PER_BLOCK), THREADS_PER_BLOCK >> >(d_width, d_height, d_vertices, d_numVertices);
+		vertexShader<<<ceil(((float)numVertices) / THREADS_PER_BLOCK), THREADS_PER_BLOCK>>>(d_width, d_height, d_vertices, d_verticesTransformed, d_numVertices, d_projMat, d_modelMat);
 		cudaDeviceSynchronize();
 		printf("%s\n", cudaGetErrorString(cudaGetLastError()));
 		printf("Vertex shader complete.\n");
 
 		// Rasterize
 		printf("Rasterization...\n");
-		rasterizeTriangle << <numTriangles, THREADS_PER_BLOCK >> >(d_width, d_height, d_vertices, d_indices, d_fragments, d_interpolation, d_triangles, d_cull);
+		rasterizeTriangle<<<numTriangles, THREADS_PER_BLOCK>>>(d_width, d_height, d_verticesTransformed, d_indices, d_fragments, d_interpolation, d_triangles, d_cull);
 		//cudaDeviceSynchronize();
 		printf("%s\n", cudaGetErrorString(cudaGetLastError()));
 		printf("Rasterization complete.\n");
 
 		// Fragment Shader
 		printf("Fragment shader...\n");
-		fragmentShader << <numTriangles, THREADS_PER_BLOCK >> >(d_pixels, d_width, d_height, d_vertices, d_indices, d_fragments, d_interpolation, d_triangles);
-		cudaDeviceSynchronize();
+		fragmentShader<<<numTriangles, THREADS_PER_BLOCK>>>(d_pixels, d_width, d_height, d_verticesTransformed, d_indices, d_fragments, d_interpolation, d_triangles);
+		//cudaDeviceSynchronize();
 		printf("%s\n", cudaGetErrorString(cudaGetLastError()));
 		printf("Fragment shader complete.\n");
 
@@ -195,14 +198,16 @@ namespace flex {
 		cudaMemcpy(d_cull, &cull, sizeof(bool), cudaMemcpyHostToDevice);
 	}
 
-	void bindImage(uchar4 image[], int imageWidth, int imageHeight) {
-		pixels = image;
-		width = imageWidth;
-		height = imageHeight;
-
+	void bufferImage(uchar4 image[], int imageWidth, int imageHeight) {
+		delete[] background;
 		cudaFree(d_pixels);
 		cudaFree(d_width);
 		cudaFree(d_height);
+
+		background = new uchar4[imageWidth * imageHeight];
+		pixels = image;
+		width = imageWidth;
+		height = imageHeight;
 
 		cudaMalloc((void **)&d_pixels, sizeof(uchar4) * width * height);
 		cudaMalloc((void **)&d_width, sizeof(int));
@@ -228,20 +233,22 @@ namespace flex {
 		cudaMalloc((void **)&d_triangles, sizeof(int) * width * height);
 	}
 
-	void bindVertices(float3 vertices[], int length) {
+	void bufferVertices(float3 vertices[], int length) {
 		numVertices = length;
 
 		cudaFree(d_vertices);
+		cudaFree(d_verticesTransformed);
 		cudaFree(d_numVertices);
 
 		cudaMalloc((void **)&d_numVertices, sizeof(int));
 		cudaMalloc((void **)&d_vertices, sizeof(float3) * numVertices);
+		cudaMalloc((void **)&d_verticesTransformed, sizeof(float3) * numVertices);
 
 		cudaMemcpy(d_numVertices, &numVertices, sizeof(int), cudaMemcpyHostToDevice);
 		cudaMemcpy(d_vertices, vertices, sizeof(float3) * numVertices, cudaMemcpyHostToDevice);
 	}
 
-	void bindIndices(int3 indices[], int length) {
+	void bufferIndices(int3 indices[], int length) {
 		numTriangles = length;
 		cudaFree(d_indices);
 		cudaMalloc((void **)&d_indices, sizeof(int3) * numTriangles);
@@ -253,10 +260,23 @@ namespace flex {
 		cudaMalloc((void **)&d_fragments, sizeof(fragment) * numTriangles * THREADS_PER_BLOCK);
 	}
 
+	void bufferProjectionMatrix(float3 matrix[]) {
+		cudaFree(d_projMat);
+		cudaMalloc((void **)&d_projMat, sizeof(float3) * 3);
+		cudaMemcpy(d_projMat, matrix, sizeof(float3) * 3, cudaMemcpyHostToDevice);
+	}
+
+	void bufferModelViewMatrix(float3 matrix[]) {
+		cudaFree(d_modelMat);
+		cudaMalloc((void **)&d_modelMat, sizeof(float3) * 3);
+		cudaMemcpy(d_modelMat, matrix, sizeof(float3) * 3, cudaMemcpyHostToDevice);
+	}
+
 	void render() {
 		cudaMemcpy(d_fragments, fragments, sizeof(fragment) * numTriangles * THREADS_PER_BLOCK, cudaMemcpyHostToDevice);
 		cudaMemcpy(d_interpolation, interpolation, sizeof(float3) * width * height, cudaMemcpyHostToDevice);
 		cudaMemcpy(d_triangles, triangles, sizeof(int) * width * height, cudaMemcpyHostToDevice);
+		cudaMemcpy(d_pixels, background, sizeof(uchar4) * width * height, cudaMemcpyHostToDevice);
 
 		pipeline();
 

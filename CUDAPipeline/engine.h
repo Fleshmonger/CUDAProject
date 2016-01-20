@@ -25,14 +25,16 @@
 #include <thrust/host_vector.h> 
 #include <thrust/device_vector.h>
 
-#include "meshes.h"
+#include "common.h"
 
 // CUDA
 namespace flex {
 	void init(bool cull);
-	void bindImage(uchar4 image[], int windowWidth, int windowHeight);
-	void bindVertices(float3 vertices[], int length);
-	void bindIndices(int3 indices[], int length);
+	void bufferImage(uchar4 image[], int windowWidth, int windowHeight);
+	void bufferVertices(float3 vertices[], int length);
+	void bufferIndices(int3 indices[], int length);
+	void bufferProjectionMatrix(float3 matrix[]);
+	void bufferModelViewMatrix(float3 matrix[]);
 	void render();
 }
 

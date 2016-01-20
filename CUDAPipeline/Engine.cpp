@@ -1,8 +1,11 @@
+#define _USE_MATH_DEFINES
+#include <cmath>
 #include "engine.h"
 
 int lastTime, frameCount = 0;
 
 int imageWidth = 1000, imageHeight = 1000;
+float theta = 0;
 uchar4 *image;
 GLuint gl_Tex, gl_Shader;
 
@@ -19,7 +22,7 @@ int main(int argc, char **argv) {
 
 	// Triangle Setup
 	printf("Triangle Setup... ");
-	int subdivisions = 6;
+	int subdivisions = 0;
 	float3 *vertices = makeSphere(make_float3(0.0, 0.0, 0.0), 1.0, subdivisions);
 	int numVertices = 3 * pow(4, subdivisions + 1);
 
@@ -29,20 +32,41 @@ int main(int argc, char **argv) {
 	int numIndices = numVertices / 3;
 	printf("Done!\n");
 
+	// Matrices
+	float3 eye = make_float3(1, 0, 1),
+		at = make_float3(0, 0, 0),
+		up = make_float3(0, 1, 0),
+		*modelMat = lookAt(eye, at, up),
+		*projMat = det3();
+
+	// Texture
+	initOpenGLBuffers();
+
 	// Draw
+	printf("Flex Setup... ");
 	image = new uchar4[imageWidth * imageHeight];
 	flex::init(true);
-	flex::bindImage(image, imageWidth, imageHeight);
-	flex::bindVertices(vertices, numVertices);
-	flex::bindIndices(indices, numIndices);
+	flex::bufferImage(image, imageWidth, imageHeight);
+	flex::bufferVertices(vertices, numVertices);
+	flex::bufferIndices(indices, numIndices);
+	flex::bufferModelViewMatrix(modelMat);
+	flex::bufferProjectionMatrix(projMat);
+	printf("Done!\n");
 
 	// Render Loop
+	printf("Starting Render Loop\n");
 	lastTime = glutGet(GLUT_ELAPSED_TIME);
-	initOpenGLBuffers();
 	glutMainLoop();
 }
 
 void displayFunc() {
+	theta = fmod(theta + 0.01, 2 * M_PI);
+	float3 eye = make_float3(sin(theta), 0, cos(theta)),
+		at = make_float3(0, 0, 0),
+		up = make_float3(0, 1, 0),
+		*modelMat = lookAt(eye, at, up);
+	flex::bufferModelViewMatrix(modelMat);
+
 	flex::render();
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, imageWidth, imageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
 

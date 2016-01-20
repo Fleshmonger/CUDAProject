@@ -31,10 +31,10 @@
 namespace flex {
 	void init(bool cull);
 	void bufferImage(uchar4 image[], int windowWidth, int windowHeight);
-	void bufferVertices(float3 vertices[], int length);
+	void bufferVertices(float4 vertices[], int length);
 	void bufferIndices(int3 indices[], int length);
-	void bufferProjectionMatrix(float3 matrix[]);
-	void bufferModelViewMatrix(float3 matrix[]);
+	void bufferProjectionMatrix(float4 matrix[]);
+	void bufferModelViewMatrix(float4 matrix[]);
 	void render();
 }
 

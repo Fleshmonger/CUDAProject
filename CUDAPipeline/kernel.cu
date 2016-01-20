@@ -9,8 +9,8 @@ using namespace std;
 using namespace thrust;
 
 namespace flex {
-	#define THREADS_PER_BLOCK 256
-	#define SQRT_TPB 16
+	#define THREADS_PER_BLOCK 64
+	#define SQRT_TPB 8
 
 	struct fragment {
 		int i_x, i_y, i_width, i_height, index;
@@ -35,7 +35,8 @@ namespace flex {
 	bool *d_cull;
 	int width = 0, height = 0, numVertices = 0, numTriangles = 0, *triangles, *d_width, *d_height, *d_numVertices, *d_triangles;
 	int3 *d_indices;
-	float3 *interpolation, *d_vertices, *d_verticesTransformed, *d_projMat, *d_modelMat, *d_interpolation;
+	float3 *interpolation, *d_interpolation;
+	float4 *d_vertices, *d_verticesTransformed, *d_projMat, *d_modelMat;
 	uchar4 *background, *pixels, *d_pixels;
 	fragment *fragments, *d_fragments;
 
@@ -65,24 +66,25 @@ namespace flex {
 		return a - (int)a > 0.0 ? (int)a + 1.0 : a;
 	}
 
-	__device__ float3 d_cross(float3 u, float3 v) {
-		return make_float3(u.y * v.z - u.z * v.y, u.z * v.x - u.x * v.z, u.x * v.y - u.y * v.x);
+	__device__ float4 d_cross(float4 u, float4 v) {
+		return make_float4(u.y * v.z - u.z * v.y, u.z * v.x - u.x * v.z, u.x * v.y - u.y * v.x, 1);
 	}
 
-	__device__ float3 d_subtract(float3 u, float3 v) {
-		return make_float3(u.x - v.x, u.y - v.y, u.z - v.z);
+	__device__ float4 d_subtract(float4 u, float4 v) {
+		return make_float4(u.x - v.x, u.y - v.y, u.z - v.z, 1);
 	}
 
-	__device__ float3 mult(float3 mat[], float3 v) {
-		return make_float3(
-			mat[0].x * v.x + mat[1].x * v.y + mat[2].x * v.z,
-			mat[0].y * v.x + mat[1].y * v.y + mat[2].y * v.z,
-			mat[0].z * v.x + mat[1].z * v.y + mat[2].z * v.z
+	__device__ float4 mult(float4 mat[], float4 v) {
+		return make_float4(
+			mat[0].x * v.x + mat[1].x * v.y + mat[2].x * v.z + mat[3].x * v.w,
+			mat[0].y * v.x + mat[1].y * v.y + mat[2].y * v.z + mat[3].y * v.w,
+			mat[0].z * v.x + mat[1].z * v.y + mat[2].z * v.z + mat[3].z * v.w,
+			mat[0].w * v.x + mat[1].w * v.y + mat[2].w * v.z + mat[3].w * v.w
 			);
 	}
 
 	// Runs the vertex shader on a vertex.
-	__global__ void vertexShader(int *width, int *height, float3 vertices[], float3 verticesTransformed[], int *numVertices, float3 projMat[], float3 modelMat[]) {
+	__global__ void vertexShader(int *width, int *height, float4 vertices[], float4 verticesTransformed[], int *numVertices, float4 projMat[], float4 modelMat[]) {
 		// Retrieve Vertex.
 		int index = threadIdx.x + blockIdx.x * THREADS_PER_BLOCK;
 		if (index >= *numVertices)
@@ -91,10 +93,10 @@ namespace flex {
 	}
 
 	// Rasterizes a triangle.
-	__global__ void rasterizeTriangle(int *width, int *height, float3 vertices[], int3 indices[], fragment fragments[], float3 interpolation[], int triangles[], bool *cull) {
+	__global__ void rasterizeTriangle(int *width, int *height, float4 vertices[], int3 indices[], fragment fragments[], float3 interpolation[], int triangles[], bool *cull) {
 		// Retrieve Vertices
 		int3 index = indices[blockIdx.x];
-		float3 v1 = vertices[index.x],
+		float4 v1 = vertices[index.x],
 			v2 = vertices[index.y],
 			v3 = vertices[index.z];
 
@@ -139,7 +141,7 @@ namespace flex {
 	}
 
 	// Runs the fragment shader on a fragment.
-	__global__ void fragmentShader(uchar4 *d_pixels, int *width, int *height, float3 vertices[], int3 indices[], fragment fragments[], float3 interpolation[], int triangles[]) {
+	__global__ void fragmentShader(uchar4 *d_pixels, int *width, int *height, float4 vertices[], int3 indices[], fragment fragments[], float3 interpolation[], int triangles[]) {
 		// Retrieve Fragment
 		fragment frag = fragments[threadIdx.x + blockIdx.x * THREADS_PER_BLOCK];
 
@@ -150,7 +152,7 @@ namespace flex {
 				if (triangles[index] == frag.index) {
 
 					int3 vIndex = indices[triangles[index]];
-					float3 v1 = vertices[vIndex.x],
+					float4 v1 = vertices[vIndex.x],
 						v2 = vertices[vIndex.y],
 						v3 = vertices[vIndex.z];
 					float red = ((v1.x + 1.0) / 2) * interpolation[index].x + ((v2.x + 1.0) / 2) * interpolation[index].y + ((v3.x + 1.0) / 2) * interpolation[index].z,
@@ -233,7 +235,7 @@ namespace flex {
 		cudaMalloc((void **)&d_triangles, sizeof(int) * width * height);
 	}
 
-	void bufferVertices(float3 vertices[], int length) {
+	void bufferVertices(float4 vertices[], int length) {
 		numVertices = length;
 
 		cudaFree(d_vertices);
@@ -241,11 +243,11 @@ namespace flex {
 		cudaFree(d_numVertices);
 
 		cudaMalloc((void **)&d_numVertices, sizeof(int));
-		cudaMalloc((void **)&d_vertices, sizeof(float3) * numVertices);
-		cudaMalloc((void **)&d_verticesTransformed, sizeof(float3) * numVertices);
+		cudaMalloc((void **)&d_vertices, sizeof(float4) * numVertices);
+		cudaMalloc((void **)&d_verticesTransformed, sizeof(float4) * numVertices);
 
 		cudaMemcpy(d_numVertices, &numVertices, sizeof(int), cudaMemcpyHostToDevice);
-		cudaMemcpy(d_vertices, vertices, sizeof(float3) * numVertices, cudaMemcpyHostToDevice);
+		cudaMemcpy(d_vertices, vertices, sizeof(float4) * numVertices, cudaMemcpyHostToDevice);
 	}
 
 	void bufferIndices(int3 indices[], int length) {
@@ -260,16 +262,16 @@ namespace flex {
 		cudaMalloc((void **)&d_fragments, sizeof(fragment) * numTriangles * THREADS_PER_BLOCK);
 	}
 
-	void bufferProjectionMatrix(float3 matrix[]) {
+	void bufferProjectionMatrix(float4 matrix[]) {
 		cudaFree(d_projMat);
-		cudaMalloc((void **)&d_projMat, sizeof(float3) * 3);
-		cudaMemcpy(d_projMat, matrix, sizeof(float3) * 3, cudaMemcpyHostToDevice);
+		cudaMalloc((void **)&d_projMat, sizeof(float4) * 4);
+		cudaMemcpy(d_projMat, matrix, sizeof(float4) * 4, cudaMemcpyHostToDevice);
 	}
 
-	void bufferModelViewMatrix(float3 matrix[]) {
+	void bufferModelViewMatrix(float4 matrix[]) {
 		cudaFree(d_modelMat);
-		cudaMalloc((void **)&d_modelMat, sizeof(float3) * 3);
-		cudaMemcpy(d_modelMat, matrix, sizeof(float3) * 3, cudaMemcpyHostToDevice);
+		cudaMalloc((void **)&d_modelMat, sizeof(float4) * 4);
+		cudaMemcpy(d_modelMat, matrix, sizeof(float4) * 4, cudaMemcpyHostToDevice);
 	}
 
 	void render() {

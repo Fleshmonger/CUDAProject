@@ -22,8 +22,8 @@ int main(int argc, char **argv) {
 
 	// Triangle Setup
 	printf("Triangle Setup... ");
-	int subdivisions = 0;
-	float3 *vertices = makeSphere(make_float3(0.0, 0.0, 0.0), 1.0, subdivisions);
+	int subdivisions = 5;
+	float4 *vertices = makeSphere(make_float3(0.0, 0.0, 0.0), 1.0, subdivisions);
 	int numVertices = 3 * pow(4, subdivisions + 1);
 
 	int3 *indices = new int3[numVertices / 3];
@@ -35,9 +35,9 @@ int main(int argc, char **argv) {
 	// Matrices
 	float3 eye = make_float3(1, 0, 1),
 		at = make_float3(0, 0, 0),
-		up = make_float3(0, 1, 0),
-		*modelMat = lookAt(eye, at, up),
-		*projMat = det3();
+		up = make_float3(0, 1, 0);
+	float4 *modelMat = lookAt(eye, at, up),
+		*projMat = det4();
 
 	// Texture
 	initOpenGLBuffers();
@@ -61,10 +61,10 @@ int main(int argc, char **argv) {
 
 void displayFunc() {
 	theta = fmod(theta + 0.01, 2 * M_PI);
-	float3 eye = make_float3(sin(theta), 0, cos(theta)),
-		at = make_float3(0, 0, 0),
-		up = make_float3(0, 1, 0),
-		*modelMat = lookAt(eye, at, up);
+	float3 eye = make_float3(sin(theta), cos(theta), -4),
+		at = make_float3(sin(theta), cos(theta), 0),
+		up = make_float3(0, 1, 0);
+	float4 *modelMat = lookAt(eye, at, up);
 	flex::bufferModelViewMatrix(modelMat);
 
 	flex::render();

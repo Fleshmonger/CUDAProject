@@ -22,7 +22,7 @@ int main(int argc, char **argv) {
 
 	// Triangle Setup
 	printf("Triangle Setup... ");
-	int subdivisions = 5;
+	int subdivisions = 7;
 	float4 *vertices = makeSphere(make_float3(0.0, 0.0, 0.0), 1.0, subdivisions);
 	int numVertices = 3 * pow(4, subdivisions + 1);
 
@@ -33,11 +33,13 @@ int main(int argc, char **argv) {
 	printf("Done!\n");
 
 	// Matrices
+	/*
 	float3 eye = make_float3(1, 0, 1),
 		at = make_float3(0, 0, 0),
 		up = make_float3(0, 1, 0);
-	float4 *modelMat = lookAt(eye, at, up),
-		*projMat = det4();
+	float4* modelMat = lookAt(eye, at, up);
+	float4* projMat = det4();
+	*/
 
 	// Texture
 	initOpenGLBuffers();
@@ -45,12 +47,11 @@ int main(int argc, char **argv) {
 	// Draw
 	printf("Flex Setup... ");
 	image = new uchar4[imageWidth * imageHeight];
-	flex::init(true);
+	flex::init(true, make_float3(1, 0, 1));
 	flex::bufferImage(image, imageWidth, imageHeight);
-	flex::bufferVertices(vertices, numVertices);
+	flex::bufferVertices(vertices, vertices ,numVertices);
 	flex::bufferIndices(indices, numIndices);
-	flex::bufferModelViewMatrix(modelMat);
-	flex::bufferProjectionMatrix(projMat);
+	//flex::bufferProjectionMatrix(projMat);
 	printf("Done!\n");
 
 	// Render Loop
@@ -61,11 +62,35 @@ int main(int argc, char **argv) {
 
 void displayFunc() {
 	theta = fmod(theta + 0.01, 2 * M_PI);
-	float3 eye = make_float3(sin(theta), cos(theta), -4),
-		at = make_float3(sin(theta), cos(theta), 0),
+	float3 eye = make_float3(sin(theta), 0, cos(theta)),
+		at = make_float3(0, 0, 0),
 		up = make_float3(0, 1, 0);
-	float4 *modelMat = lookAt(eye, at, up);
-	flex::bufferModelViewMatrix(modelMat);
+	float4 *modelMat = lookAt(eye, at, up),
+		//*proj = computeFOVProjection(90, imageWidth / imageHeight,  1, 51);
+		*proj = det4();
+
+	/*
+	float4 normalMatrix[] = { make_float4(modelMat[0].x, modelMat[0].y, modelMat[0].x, 0),
+		make_float4(modelMat[1].y, modelMat[1].y, modelMat[2].y, 0),
+		make_float4(modelMat[2].z, modelMat[1].z, modelMat[2].z, 0),
+		make_float4(0, 0, 0, 0)
+	};*/
+	
+	float4 normalMatrix[4] = {
+		make_float4(modelMat[0].x, modelMat[1].x, modelMat[2].x, 0),
+		make_float4(modelMat[0].y, modelMat[1].y, modelMat[2].y, 0),
+		make_float4(modelMat[0].z, modelMat[1].z, modelMat[2].z, 0),
+		make_float4(0, 0, 0, 0) 
+	};					
+							
+	/*
+	float4 normalMatrix[] = { make_float4(modelMat[0].x, modelMat[0].y, modelMat[0].z, 0),
+								make_float4(modelMat[1].x, modelMat[1].y, modelMat[1].z, 0),
+								make_float4(modelMat[2].x, modelMat[2].y, modelMat[2].z, 0),
+								make_float4(0, 0, 0, 0) };
+	*/
+	flex::bufferModelViewMatrix(modelMat, normalMatrix);
+	flex::bufferProjectionMatrix(proj);
 
 	flex::render();
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, imageWidth, imageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);

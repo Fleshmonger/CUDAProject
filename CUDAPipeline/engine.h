@@ -29,12 +29,12 @@
 
 // CUDA
 namespace flex {
-	void init(bool cull);
+	void init(bool cull, float3 light);
 	void bufferImage(uchar4 image[], int windowWidth, int windowHeight);
-	void bufferVertices(float4 vertices[], int length);
+	void bufferVertices(float4 vertices[], float4 normals[], int length);
 	void bufferIndices(int3 indices[], int length);
 	void bufferProjectionMatrix(float4 matrix[]);
-	void bufferModelViewMatrix(float4 matrix[]);
+	void bufferModelViewMatrix(float4 matrix[], float4 normalMatrix[]);
 	void render();
 }
 
